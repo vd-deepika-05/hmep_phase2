@@ -1,1 +1,41 @@
-<p>project-details-dashboard works!</p>
+<p>Purpose
+Provide project-wise execution summary after project owner selects a project. This is the main
+navigation page for all Release 2 activities. It corresponds to the PPT screens where project summary,
+part category counts, and action buttons are shown.
+
+Main fields
+Field Type of Data Control Type Mandatory Source / Mapping
+Project Owner Character Display Yes selected project allocation
+Employee ID Character Display Yes employee master
+Project Name Character Display Yes project_header.project_name
+Project Code Character Display Yes project_header.project_code
+Work Order Character / Number Display Yes work_order_header.wo_no
+Date Date Display Yes work_order_header.wo_date / current project date
+Project Status Character Display Yes project current status
+Part category summary blocks
+For each of the below categories:
+• Machining Parts
+
+Confidential – Only for Internal Purpose
+
+5 | P a g e
+
+• Sheetmetal Parts
+• Casting Parts
+• Other Parts
+Display the following values:
+• Total No of Parts
+• Completed
+• In Process
+• Surface Finish
+• Hold
+Actions
+• Work on this Project Parts
+• Reports Upload / Linking
+• Stage-wise Production Tracking
+• Raw Stage Assembly Check
+• Paint / Engraving Check
+• Cleared for Billing
+Validation
+• If project status is Delivered, system may show Delivered message only
+• Final checks and billing readiness should depend on execution completion</p>

@@ -1,1 +1,18 @@
-<p>project-owner-workbench works!</p>
+<p>Project Owner
+Purpose
+Display only the projects allocated to the logged-in project owner and provide entry into project-wise execution. This extends the
+Release 1 owner allocation flow into execution usage.
+Main fields
+Field Type of Data Control Type Mandatory Source / Mapping
+Project Owner Character Display Yes from login / employee master
+Employee ID Character Display Yes from login / employee master
+Project Code Character Display Yes project_header.project_code
+Project Name Character Display Yes project_header.project_name
+Work Order Character / Number Display Yes work_order_header.wo_no
+Project Status Character Display Yes project current status
+
+Actions
+• Open Project
+Validation
+• Only projects assigned to logged-in user shall be visible
+• Delivered projects may be shown as read-only if required</p>
