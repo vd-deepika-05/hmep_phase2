@@ -1,0 +1,94 @@
+/* ============================================
+   SIDEBAR - RESPONSIVE (add to style.css)
+   ============================================ */
+
+/* Overlay backdrop for mobile/tablet */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-backdrop.visible {
+  opacity: 1;
+}
+
+/* ── Tablet (≤ 1024px): sidebar collapses by default, overlay on open ── */
+@media screen and (max-width: 1024px) {
+
+  .sidebar-backdrop {
+    display: block;
+    pointer-events: none;
+  }
+  .sidebar-backdrop.visible {
+    pointer-events: auto;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 999;
+    width: 280px;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
+  }
+
+  /* When NOT collapsed = open on mobile */
+  .sidebar:not(.collapsed) {
+    transform: translateX(0);
+    width: 280px;
+  }
+
+  /* When collapsed = fully hidden */
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+    width: 280px; /* keep width so animation is smooth */
+  }
+
+  /* Main content takes full width */
+  .layout-container .main-section {
+    width: 100%;
+    margin-left: 0 !important;
+  }
+
+  .layout-container {
+    overflow: hidden;
+  }
+}
+
+/* ── Mobile (≤ 640px): same drawer pattern, slightly tweaked ── */
+@media screen and (max-width: 640px) {
+  .sidebar {
+    width: 260px;
+  }
+
+  .sidebar:not(.collapsed) {
+    width: 260px;
+  }
+}
+.menu-title {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-group a {
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.expandable i {
+  transition: transform 0.3s ease;
+}
