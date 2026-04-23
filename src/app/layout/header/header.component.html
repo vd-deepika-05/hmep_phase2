@@ -6,7 +6,19 @@
     <div class="toggle" (click)="toggleSidebar()" title="Toggle Sidebar">
       <i class="pi pi-bars"></i>
     </div>
-
+    
+    <div class="right">
+    <div class="header-user-section">
+      <div class="user-info">
+        <span class="user-name">Rajesh Kumar</span>
+        <span class="user-role">Administrator</span>
+      </div>
+      <div class="user-avatar">RK</div>
+      <button class="logout-icon-btn" (click)="onLogout()" title="Logout">
+        <i class="pi pi-power-off"></i>
+      </button>
+    </div>
+  </div>
     <!-- DYNAMIC BREADCRUMB -->
     <nav class="breadcrumb" aria-label="breadcrumb">
       <!-- <ng-container *ngFor="let crumb of (headerConfig$ | async)?.breadcrumbs; let last = last; let i = index">

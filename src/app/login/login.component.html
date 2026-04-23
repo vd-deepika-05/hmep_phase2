@@ -26,13 +26,13 @@
         </small>
       </div>
 
-      <button type="submit" class="login-btn" [disabled]="loading">
-        {{ loading ? 'Logging in...' : 'Login' }}
-      </button>
+        <!-- <button type="submit" class="login-btn" [disabled]="loading">
+          {{ loading ? 'Logging in...' : 'Login' }}
+        </button> -->
 
       <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
 
     </form>
-
+     <a routerLink="/main-layout/project-details-dashboard" class="demo-link"><button class="login-btn" >Login</button></a>
   </div>
 </div>

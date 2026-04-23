@@ -40,6 +40,14 @@ import { ModuleLayoutComponent } from './layout/module-layout/module-layout.comp
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProjectOwnerWorkbenchComponent } from './pages/project-owner-workbench/project-owner-workbench.component';
 import { ProjectDetailsDashboardComponent } from './pages/project-details-dashboard/project-details-dashboard.component';
+import { DetailBomComponent } from './pages/detail-bom/detail-bom.component';
+import { ReportsUploadComponent } from './pages/reports-upload/reports-upload.component';
+import { StagewiseProductionComponent } from './pages/stagewise-production/stagewise-production.component';
+import { InspectionReportComponent } from './pages/inspection-report/inspection-report.component';
+import { QcDecisionComponent } from './pages/qc-decision/qc-decision.component';
+import { NonConformanceReportComponent } from './pages/non-conformance-report/non-conformance-report.component';
+import { FinalChecksComponent } from './pages/final-checks/final-checks.component';
+import { BillingReadinessComponent } from './pages/billing-readiness/billing-readiness.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +66,14 @@ import { ProjectDetailsDashboardComponent } from './pages/project-details-dashbo
          ModuleLayoutComponent,
                ProjectOwnerWorkbenchComponent,
                ProjectDetailsDashboardComponent,
+               DetailBomComponent,
+               ReportsUploadComponent,
+               StagewiseProductionComponent,
+               InspectionReportComponent,
+               QcDecisionComponent,
+               NonConformanceReportComponent,
+               FinalChecksComponent,
+               BillingReadinessComponent,
       
         
   ],
