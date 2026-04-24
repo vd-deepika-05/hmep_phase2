@@ -1,103 +1,78 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { SidebarService } from '../sidebar/sidebar.service';
 import { Subscription } from 'rxjs';
-import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sidebar',
   standalone: false,
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css'
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit, OnDestroy {
 
-  isCollapsed = false;
-  isMobile = false;
+  isCollapsed: boolean = false;
+  isMobile: boolean = false;
 
-openModule: string | null = null;
-  private sub!: Subscription;
+  private serviceSub!: Subscription;
+  private routerSub!: Subscription;
   private readonly MOBILE_BREAKPOINT = 1024;
 
-  constructor(private sidebarService: SidebarService,
-  private router: Router) {}
+  constructor(
+    private sidebarService: SidebarService,
+    private router: Router
+  ) {}
 
- ngOnInit() {
-  this.checkScreenSize();
+  ngOnInit(): void {
+    this.checkScreenSize();
 
-  this.sub = this.sidebarService.sidebarState$.subscribe(state => {
-    this.isCollapsed = state;
-  });
-
-  // 👇 Listen to route changes
-  this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe((event: NavigationEnd) => {
-      this.setModuleFromRoute(event.urlAfterRedirects);
+    // Sync isCollapsed with SidebarService (header hamburger button drives this)
+    this.serviceSub = this.sidebarService.sidebarState$.subscribe(state => {
+      this.isCollapsed = state;
     });
 
-  // 👇 also run once on load
-  this.setModuleFromRoute(this.router.url);
-}
-setModuleFromRoute(url: string) {
-  if (url.startsWith('/admin')) {
-    this.openModule = 'admin';
-  } else if (url.startsWith('/master')) {
-    this.openModule = 'master';
-  } else if (url.startsWith('/project-layout')) {
-    this.openModule = 'project';
-  } else {
-    this.openModule = null; // optional
-  }
-}
-  ngOnDestroy() {
-    this.sub?.unsubscribe();
-  }
-   toggleModule(module: string) {
-    if (this.openModule === module) {
-      this.openModule = null; // collapse if already open
-    } else {
-      this.openModule = module; // open the clicked module
-    }
+    // On mobile: collapse after navigation
+    this.routerSub = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        if (this.isMobile) {
+          this.sidebarService.setState(true);
+        }
+      });
   }
 
-
-  /** Close sidebar when a nav link is clicked on mobile */
-  onNavClick() {
-    if (this.isMobile) {
-      this.sidebarService.setState(true); // collapsed = hidden on mobile
-    }
+  ngOnDestroy(): void {
+    this.serviceSub?.unsubscribe();
+    this.routerSub?.unsubscribe();
   }
 
-  /** Close sidebar when backdrop is clicked */
-  closeSidebar() {
-    this.sidebarService.setState(true);
-  }
-
-  /** Detect screen resize */
   @HostListener('window:resize')
-  onResize() {
+  onResize(): void {
     this.checkScreenSize();
   }
 
-  private checkScreenSize() {
+  private checkScreenSize(): void {
     const wasMobile = this.isMobile;
     this.isMobile = window.innerWidth <= this.MOBILE_BREAKPOINT;
 
-    // Auto-collapse when entering mobile
     if (this.isMobile && !wasMobile) {
-      this.sidebarService.setState(true);
+      this.sidebarService.setState(true);   // entering mobile → hide sidebar
     }
-    // Auto-expand when leaving mobile (back to desktop)
     if (!this.isMobile && wasMobile) {
-      this.sidebarService.setState(false);
+      this.sidebarService.setState(false);  // back to desktop → show sidebar
+    }
+  }
+
+  /** Backdrop click — closes sidebar on mobile */
+  closeSidebar(): void {
+    this.sidebarService.setState(true);
+  }
+
+  /** Nav link clicked on mobile — close sidebar */
+  onNavClick(): void {
+    if (this.isMobile) {
+      this.sidebarService.setState(true);
     }
   }
 }
-
-
- 
-
- 
-
-  

@@ -1,41 +1,211 @@
-<p>Purpose
-Provide project-wise execution summary after project owner selects a project. This is the main
-navigation page for all Release 2 activities. It corresponds to the PPT screens where project summary,
-part category counts, and action buttons are shown.
+<div class="um-root">
+  <!-- Project Delivered Status Alert -->
+  <div *ngIf="isDelivered" class="pd-delivered-alert">
+    <i class="pi pi-check-circle"></i>
+    <span>Project has been Delivered</span>
+  </div>
 
-Main fields
-Field Type of Data Control Type Mandatory Source / Mapping
-Project Owner Character Display Yes selected project allocation
-Employee ID Character Display Yes employee master
-Project Name Character Display Yes project_header.project_name
-Project Code Character Display Yes project_header.project_code
-Work Order Character / Number Display Yes work_order_header.wo_no
-Date Date Display Yes work_order_header.wo_date / current project date
-Project Status Character Display Yes project current status
-Part category summary blocks
-For each of the below categories:
-• Machining Parts
+  <!-- Header Section -->
+  <div class="pd-header-section">
+    <div class="pd-header-title">
+      <h1>Release 2 Demo Platform</h1>
+      <p>User-friendly project-wise application aligned to Release 1 style and Release 2 PPT flow.</p>
+    </div>
 
-Confidential – Only for Internal Purpose
+    <div class="pd-search-box">
+      <i class="pi pi-search"></i>
+      <input type="text" placeholder="Search part / code / stage">
+    </div>
+  </div>
 
-5 | P a g e
+  <!-- Project Header Card -->
+  <div class="pd-project-header-card">
+    <div class="pd-header-field">
+      <label>Project Code</label>
+      <span class="pd-field-value">{{ projectDetails.projectCode }}</span>
+    </div>
+    <div class="pd-header-field">
+      <label>Project Name</label>
+      <span class="pd-field-value">{{ projectDetails.projectName }}</span>
+    </div>
+    <div class="pd-header-field">
+      <label>Work Order</label>
+      <span class="pd-field-value">{{ projectDetails.workOrder }}</span>
+    </div>
+    <div class="pd-header-field">
+      <label>Owner</label>
+      <span class="pd-field-value">{{ projectDetails.projectOwner }}</span>
+    </div>
+    <div class="pd-header-field">
+      <label>EMP ID</label>
+      <span class="pd-field-value">{{ projectDetails.empId }}</span>
+    </div>
+    <div class="pd-header-field">
+      <label>Project Status</label>
+      <span class="pd-field-value pd-status" [ngClass]="'pd-status-' + projectDetails.projectStatus.toLowerCase().replace(' ', '-')">
+        {{ projectDetails.projectStatus }}
+      </span>
+    </div>
+  </div>
 
-• Sheetmetal Parts
-• Casting Parts
-• Other Parts
-Display the following values:
-• Total No of Parts
-• Completed
-• In Process
-• Surface Finish
-• Hold
-Actions
-• Work on this Project Parts
-• Reports Upload / Linking
-• Stage-wise Production Tracking
-• Raw Stage Assembly Check
-• Paint / Engraving Check
-• Cleared for Billing
-Validation
-• If project status is Delivered, system may show Delivered message only
-• Final checks and billing readiness should depend on execution completion</p>
+  <!-- Project Details Section -->
+  <div class="pd-project-details-section">
+    <h2>Project Details</h2>
+    <div class="pd-details-grid">
+      <div class="pd-detail-item">
+        <span class="pd-detail-label">Projects Owner</span>
+        <span class="pd-detail-value">{{ projectDetails.projectOwner }}</span>
+      </div>
+      <div class="pd-detail-item">
+        <span class="pd-detail-label">Emp ID</span>
+        <span class="pd-detail-value">{{ projectDetails.empId }}</span>
+      </div>
+      <div class="pd-detail-item">
+        <span class="pd-detail-label">Project Name</span>
+        <span class="pd-detail-value">{{ projectDetails.projectName }}</span>
+      </div>
+      <div class="pd-detail-item">
+        <span class="pd-detail-label">Project Code</span>
+        <span class="pd-detail-value">{{ projectDetails.projectCode }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Part Category Summary Blocks -->
+  <div class="pd-parts-summary-section">
+    <h2>Part Category Summary</h2>
+    <div class="pd-parts-grid">
+      <!-- Machining Parts -->
+      <div class="pd-part-category-card">
+        <div class="pd-card-header">
+          <h3>{{ projectDetails.partsData.machiningParts.name }}</h3>
+        </div>
+        <div class="pd-card-content">
+          <div class="pd-total-count">{{ projectDetails.partsData.machiningParts.total }}</div>
+          <div class="pd-status-rows">
+            <div class="pd-status-row">
+              <span class="pd-label">Completed</span>
+              <span class="pd-value">{{ projectDetails.partsData.machiningParts.completed }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">In process</span>
+              <span class="pd-value">{{ projectDetails.partsData.machiningParts.inProcess }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Surface Finish</span>
+              <span class="pd-value">{{ projectDetails.partsData.machiningParts.surfaceFinish }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Hold</span>
+              <span class="pd-value">{{ projectDetails.partsData.machiningParts.hold }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sheetmetal Parts -->
+      <div class="pd-part-category-card">
+        <div class="pd-card-header">
+          <h3>{{ projectDetails.partsData.sheetmetalParts.name }}</h3>
+        </div>
+        <div class="pd-card-content">
+          <div class="pd-total-count">{{ projectDetails.partsData.sheetmetalParts.total }}</div>
+          <div class="pd-status-rows">
+            <div class="pd-status-row">
+              <span class="pd-label">Completed</span>
+              <span class="pd-value">{{ projectDetails.partsData.sheetmetalParts.completed }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">In process</span>
+              <span class="pd-value">{{ projectDetails.partsData.sheetmetalParts.inProcess }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Surface Finish</span>
+              <span class="pd-value">{{ projectDetails.partsData.sheetmetalParts.surfaceFinish }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Hold</span>
+              <span class="pd-value">{{ projectDetails.partsData.sheetmetalParts.hold }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Casting Parts -->
+      <div class="pd-part-category-card">
+        <div class="pd-card-header">
+          <h3>{{ projectDetails.partsData.castingParts.name }}</h3>
+        </div>
+        <div class="pd-card-content">
+          <div class="pd-total-count">{{ projectDetails.partsData.castingParts.total }}</div>
+          <div class="pd-status-rows">
+            <div class="pd-status-row">
+              <span class="pd-label">Completed</span>
+              <span class="pd-value">{{ projectDetails.partsData.castingParts.completed }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">In process</span>
+              <span class="pd-value">{{ projectDetails.partsData.castingParts.inProcess }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Surface Finish</span>
+              <span class="pd-value">{{ projectDetails.partsData.castingParts.surfaceFinish }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Hold</span>
+              <span class="pd-value">{{ projectDetails.partsData.castingParts.hold }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other Parts -->
+      <div class="pd-part-category-card">
+        <div class="pd-card-header">
+          <h3>{{ projectDetails.partsData.otherParts.name }}</h3>
+        </div>
+        <div class="pd-card-content">
+          <div class="pd-total-count">{{ projectDetails.partsData.otherParts.total }}</div>
+          <div class="pd-status-rows">
+            <div class="pd-status-row">
+              <span class="pd-label">Completed</span>
+              <span class="pd-value">{{ projectDetails.partsData.otherParts.completed }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">In process</span>
+              <span class="pd-value">{{ projectDetails.partsData.otherParts.inProcess }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Surface Finish</span>
+              <span class="pd-value">{{ projectDetails.partsData.otherParts.surfaceFinish }}</span>
+            </div>
+            <div class="pd-status-row">
+              <span class="pd-label">Hold</span>
+              <span class="pd-value">{{ projectDetails.partsData.otherParts.hold }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Actions Section -->
+  <div class="pd-project-actions-section">
+    <h2>Project Actions</h2>
+    <div class="pd-actions-grid">
+      <button 
+        *ngFor="let action of actionButtons"
+        class="pd-action-button"
+        [disabled]="isDelivered && action.action !== 'billingCheck'"
+        (click)="handleAction(action.action)">
+        {{ action.label }}
+      </button>
+    </div>
+    
+    <!-- Work Order Details Footer - Combined -->
+    <div class="pd-work-order-footer-combined">
+      <p><strong>Work Order :</strong> {{ projectDetails.workOrder }}</p>
+      <p><strong>Date :</strong> {{ projectDetails.date }}</p>
+    </div>
+  </div>
+</div>

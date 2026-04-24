@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p>Project Owner
 Purpose
 Display only the projects allocated to the logged-in project owner and provide entry into project-wise execution. This extends the
@@ -16,3 +17,178 @@ Actions
 Validation
 • Only projects assigned to logged-in user shall be visible
 • Delivered projects may be shown as read-only if required</p>
+=======
+<div class="um-root">
+
+  <!-- 🔷 HEADER -->
+  <div class="um-header-row">
+    <div class="um-section-header">
+      <div class="um-section-title">
+        Release 2 Demo Platform
+      </div>
+      <div class="um-section-desc">
+        User-friendly project-wise application aligned to Release 1 style and Release 2 PPT flow.
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔷 STATS -->
+  <div class="um-stats-section">
+
+    <!-- Assigned -->
+    <div class="um-stat-card">
+      <div class="um-stat-info">
+        <div class="um-stat-label">Assigned Projects</div>
+        <div class="um-stat-value">{{ stats.assigned }}</div>
+        <div class="um-stat-subtitle">Only projects mapped to logged in owner</div>
+      </div>
+      <div class="um-stat-icon-wrapper blue">
+        <i class="pi pi-briefcase"></i>
+      </div>
+    </div>
+
+    <!-- Open Execution (UPDATED ICON) -->
+    <div class="um-stat-card">
+      <div class="um-stat-info">
+        <div class="um-stat-label">Open Execution</div>
+        <div class="um-stat-value">{{ stats.open }}</div>
+        <div class="um-stat-subtitle">Projects needing work updates</div>
+      </div>
+      <div class="um-stat-icon-wrapper purple">
+        <!-- ✅ Better icon -->
+        <i class="pi pi-cog"></i>
+      </div>
+    </div>
+
+    <!-- QC -->
+    <div class="um-stat-card">
+      <div class="um-stat-info">
+        <div class="um-stat-label">QC Pending</div>
+        <div class="um-stat-value">{{ stats.qcPending }}</div>
+        <div class="um-stat-subtitle">Awaiting approval</div>
+      </div>
+      <div class="um-stat-icon-wrapper green">
+        <i class="pi pi-clock"></i>
+      </div>
+    </div>
+
+    <!-- Billing -->
+    <div class="um-stat-card">
+      <div class="um-stat-info">
+        <div class="um-stat-label">Billing Ready</div>
+        <div class="um-stat-value">{{ stats.billingReady }}</div>
+        <div class="um-stat-subtitle">Final checks pending</div>
+      </div>
+      <div class="um-stat-icon-wrapper orange">
+        <i class="pi pi-check-circle"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 🔷 TABLE -->
+  <div class="um-table-section">
+
+    <!-- HEADER + SEARCH -->
+    <div class="um-header-row">
+
+      <div class="um-section-header">
+        <div class="um-section-title">
+          Work on Projects – for Project Owners
+        </div>
+      </div>
+
+      <!-- ✅ FIXED SEARCH -->
+      <div class="wb-table-search">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          placeholder="Search projects..."
+          (input)="onGlobalSearch($event)"
+        />
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="um-table-wrapper">
+
+      <p-table
+        #dt
+        [value]="projects"
+        class="um-custom-table"
+        responsiveLayout="scroll"
+        [paginator]="true"
+        [rows]="5"
+    
+        [globalFilterFields]="['projectOwner','empId','projectCode','projectName']"
+        sortMode="multiple"
+      >
+
+        <!-- HEADER -->
+        <ng-template pTemplate="header">
+          <tr>
+
+            <th pSortableColumn="projectOwner">
+              Project Owner
+              <p-sortIcon field="projectOwner"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="empId">
+              Emp ID
+              <p-sortIcon field="empId"></p-sortIcon>
+            </th>
+
+            <th pSortableColumn="projectCode">
+              Project Code
+              <p-sortIcon field="projectCode"></p-sortIcon>
+            </th>
+
+            <th>Project Name</th>
+            <th>Work Order</th>
+            <th>Status</th>
+            <th>Action</th>
+
+          </tr>
+        </ng-template>
+
+        <!-- BODY -->
+        <ng-template pTemplate="body" let-row>
+          <tr class="um-table-row">
+
+            <td>{{ row.projectOwner }}</td>
+            <td>{{ row.empId }}</td>
+            <td class="um-text-bold">{{ row.projectCode }}</td>
+            <td>{{ row.projectName }}</td>
+            <td>{{ row.workOrder }}</td>
+
+            <td>
+              <span class="um-badge"
+                [ngClass]="{
+                  'um-badge-active': row.status === 'In Progress',
+                  'um-badge-hold': row.status === 'Hold'
+                }">
+                {{ row.status }}
+              </span>
+            </td>
+
+            <td class="um-cell-actions">
+              <button
+                pButton
+                label="Open Project"
+                class="btn primary"
+                (click)="openProject(row)">
+              </button>
+            </td>
+
+          </tr>
+        </ng-template>
+
+      </p-table>
+
+    </div>
+
+  </div>
+
+</div>
+>>>>>>> origin/surya

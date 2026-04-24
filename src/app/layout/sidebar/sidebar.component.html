@@ -19,84 +19,57 @@
   <div class="menu-container">
     <div class="menu">
 
-     
-      <p class="menu-title" (click)="toggleModule('admin')" [class.expandable]="true">
-        ADMIN MODULE
-        <i class="pi" [ngClass]="{'pi-angle-down': openModule==='admin', 'pi-angle-right': openModule!=='admin'}"></i>
-      </p>
+      <a routerLink="/main-layout/project-owner-workbench" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-home"></i>
+        <span *ngIf="!isCollapsed">Project Owner Workbench</span>
+      </a>
 
-      <div *ngIf="openModule === 'admin'" class="menu-group">
-        <a routerLink="/project-owner-workbench" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-users"></i>
-          <span *ngIf="!isCollapsed">User Management</span>
-          <span class="badge">3</span>
-        </a>
+      <a routerLink="/main-layout/project-details-dashboard" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-briefcase"></i>
+        <span *ngIf="!isCollapsed">Project Details </span>
+      </a>
 
-        <a routerLink="/admin/roles" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-lock"></i>
-          <span *ngIf="!isCollapsed">Roles & Permissions</span>
-        </a>
-        <a routerLink="/admin/access-config" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-lock"></i>
-          <span *ngIf="!isCollapsed">Access Configuration</span>
-        </a>
-      </div>
+      <a routerLink="/main-layout/detail-bom" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-sitemap"></i>
+        <span *ngIf="!isCollapsed">Detail BOM</span>
+      </a>
 
-  
-      <p class="menu-title" (click)="toggleModule('master')" [class.expandable]="true">
-        MASTER MODULES
-        <i class="pi" [ngClass]="{'pi-angle-down': openModule==='master', 'pi-angle-right': openModule!=='master'}"></i>
-      </p>
+      <a routerLink="/main-layout/reports-upload" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-upload"></i>
+        <span *ngIf="!isCollapsed">Reports Upload</span>
+      </a>
 
-      <div *ngIf="openModule === 'master'" class="menu-group">
-        <a routerLink="/master/customer" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-briefcase"></i>
-          <span *ngIf="!isCollapsed">Customer Master</span>
-        </a>
-        <a routerLink="/master/branch" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-book"></i>
-          <span *ngIf="!isCollapsed">Branch Master</span>
-        </a>
-        <a routerLink="/master/employee" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-id-card"></i>
-          <span *ngIf="!isCollapsed">Employee Master</span>
-        </a>
-        <a routerLink="/master/part-master" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-book"></i>
-          <span *ngIf="!isCollapsed">Part Masters</span>
-        </a>
-     
-      </div>
+      <a routerLink="/main-layout/stagewise-production" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-chart-bar"></i>
+        <span *ngIf="!isCollapsed">Stagewise Production</span>
+      </a>
 
-   
-      <p class="menu-title" (click)="toggleModule('project')" [class.expandable]="true">
-        PROJECT / WORK ORDER
-        <i class="pi" [ngClass]="{'pi-angle-down': openModule==='project', 'pi-angle-right': openModule!=='project'}"></i>
-      </p>
+      <a routerLink="/main-layout/inspection-report" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-search"></i>
+        <span *ngIf="!isCollapsed">Inspection Report</span>
+      </a>
 
-      <div *ngIf="openModule === 'project'" class="menu-group">
-        <a routerLink="/project-layout/project-list" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-list"></i>
-          <span *ngIf="!isCollapsed">Project List</span>
-          <span class="count">24</span>
-        </a>
-        <a routerLink="/project-layout/add-project" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-plus"></i>
-          <span *ngIf="!isCollapsed">Add / Modify Project</span>
-        </a>
-        <a routerLink="/project-layout/work-order" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-file"></i>
-          <span *ngIf="!isCollapsed">Work Order</span>
-        </a>
-        <a routerLink="/project-layout/owner-allocation" routerLinkActive="active" (click)="onNavClick()">
-          <i class="pi pi-user"></i>
-          <span *ngIf="!isCollapsed">Owner Allocation</span>
-        </a>
-      </div>
+      <a routerLink="/main-layout/qc-decision" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-check-circle"></i>
+        <span *ngIf="!isCollapsed">QC Decision</span>
+      </a>
+
+      <a routerLink="/main-layout/non-conformance-report" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-exclamation-triangle"></i>
+        <span *ngIf="!isCollapsed">Non Conformance Report</span>
+      </a>
+
+      <a routerLink="/main-layout/final-checks" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-verified"></i>
+        <span *ngIf="!isCollapsed">Final Checks</span>
+      </a>
+
+      <a routerLink="/main-layout/billing-readiness" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-wallet"></i>
+        <span *ngIf="!isCollapsed">Billing Readiness</span>
+      </a>
 
     </div>
   </div>
-
- 
 
 </div>
