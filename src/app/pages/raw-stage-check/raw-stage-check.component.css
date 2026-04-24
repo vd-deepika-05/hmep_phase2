@@ -1,0 +1,160 @@
+/* Page */
+.rac-page{
+padding:24px;
+background:#f8fafc;
+}
+
+
+/* Back */
+.rac-back-row{
+margin:14px 0;
+}
+
+.rac-back-btn{
+display:inline-flex;
+align-items:center;
+gap:8px;
+border:none;
+background:none;
+padding:0;
+font-size:14px;
+font-weight:600;
+color:#64748b;
+cursor:pointer;
+transition:.2s;
+}
+
+.rac-back-btn:hover{
+color:#334155;
+transform:translateX(-2px);
+}
+
+.rac-back-btn i{
+font-size:13px;
+}
+
+
+
+/* Main Card */
+.rac-card{
+margin-top:22px;
+background:#fff;
+border:1px solid #e2e8f0;
+border-radius:20px;
+box-shadow:0 6px 24px rgba(0,0,0,.06);
+overflow:hidden;
+}
+
+.rac-card-title{
+padding:22px 28px;
+border-bottom:1px solid #eef2f7;
+}
+
+.rac-card-title h3{
+margin:0;
+font-size:22px;
+font-weight:700;
+color:#1e293b;
+}
+
+
+/* Form wrapper */
+.rac-form-shell{
+width:100%;
+max-width:none;
+border:none;
+box-shadow:none;
+position:static;
+}
+
+
+/* Progress */
+.rac-progress-box{
+margin-bottom:22px;
+padding:18px;
+background:#f8fafc;
+border:1px solid #e2e8f0;
+border-radius:14px;
+}
+
+.rac-progress-head{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+font-weight:600;
+color:#334155;
+}
+
+.rac-progress-bar{
+height:5px;
+background:#dbe4eb;
+border-radius:30px;
+overflow:hidden;
+margin-bottom:10px;
+}
+
+.rac-progress-fill{
+height:100%;
+width:0;
+background:#f59e0b;
+transition:.4s ease;
+}
+
+.rac-progress-green{
+background:#3bd473;
+}
+
+.rac-progress-box small{
+font-size:12px;
+color:#64748b;
+}
+.rac-progress-box .pec-green-text{
+color:#3bd473 !important;
+font-size:12px;
+font-weight:400;
+}
+
+
+
+/* Remarks */
+.rac-textarea{
+height:110px !important;
+padding-top:14px;
+resize:vertical;
+}
+
+
+/* Actions */
+.rac-action-wrap{
+padding-top:20px;
+border-top:none;
+}
+
+.rac-billing-btn{
+max-width:260px;
+background:linear-gradient(135deg,#16a34a,#15803d)!important;
+box-shadow:0 4px 12px rgba(22,163,74,.25);
+}
+
+.rac-billing-btn:hover{
+transform:translateY(-1px);
+}
+
+
+/* Responsive */
+@media(max-width:768px){
+
+.rac-page{
+padding:14px;
+}
+
+.rac-card-title{
+padding:18px;
+}
+
+.rac-billing-btn{
+width:100%;
+max-width:100%;
+}
+
+}

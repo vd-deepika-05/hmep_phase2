@@ -15,6 +15,8 @@ import { ReportsUploadComponent } from './pages/reports-upload/reports-upload.co
 import { InspectionReportComponent } from './pages/inspection-report/inspection-report.component';
 import { StagewiseProductionComponent } from './pages/stagewise-production/stagewise-production.component';
 import { BillingReadinessComponent } from './pages/billing-readiness/billing-readiness.component';
+import { RawStageCheckComponent } from './pages/raw-stage-check/raw-stage-check.component';
+import { PaintCheckComponent } from './pages/paint-check/paint-check.component';
 const routes: Routes = [
 
  
@@ -45,6 +47,9 @@ const routes: Routes = [
       { path: 'reports-upload', component: ReportsUploadComponent },
       { path: 'inspection-report', component: InspectionReportComponent },
       { path: 'stagewise-production', component: StagewiseProductionComponent },
+      { path: 'raw-stage-check', component: RawStageCheckComponent },
+      { path: 'paint-check', component: PaintCheckComponent },
+
     ]
   },
 

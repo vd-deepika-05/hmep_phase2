@@ -48,6 +48,8 @@ import { QcDecisionComponent } from './pages/qc-decision/qc-decision.component';
 import { NonConformanceReportComponent } from './pages/non-conformance-report/non-conformance-report.component';
 import { FinalChecksComponent } from './pages/final-checks/final-checks.component';
 import { BillingReadinessComponent } from './pages/billing-readiness/billing-readiness.component';
+import { RawStageCheckComponent } from './pages/raw-stage-check/raw-stage-check.component';
+import { PaintCheckComponent } from './pages/paint-check/paint-check.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { BillingReadinessComponent } from './pages/billing-readiness/billing-rea
                NonConformanceReportComponent,
                FinalChecksComponent,
                BillingReadinessComponent,
+               RawStageCheckComponent,
+               PaintCheckComponent,
       
         
   ],

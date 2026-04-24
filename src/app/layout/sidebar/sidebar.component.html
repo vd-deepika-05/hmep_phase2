@@ -60,8 +60,18 @@
       </a>
 
       <a routerLink="/main-layout/final-checks" routerLinkActive="active" (click)="onNavClick()">
-        <i class="pi pi-verified"></i>
+        <i class="pi pi-shield"></i>
         <span *ngIf="!isCollapsed">Final Checks</span>
+      </a>
+
+      <a routerLink="/main-layout/raw-stage-check" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-wrench"></i>
+        <span *ngIf="!isCollapsed">Raw Stage Check</span>
+      </a>
+
+      <a routerLink="/main-layout/paint-check" routerLinkActive="active" (click)="onNavClick()">
+        <i class="pi pi-palette"></i>
+        <span *ngIf="!isCollapsed">Paint Check</span>
       </a>
 
       <a routerLink="/main-layout/billing-readiness" routerLinkActive="active" (click)="onNavClick()">
