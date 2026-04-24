@@ -1,1 +1,116 @@
-<p>stagewise-production works!</p>
+<div class="sp-root">
+  <!-- Project Header Card -->
+  <div class="sp-project-header-card">
+    <div class="sp-header-field">
+      <label>Project Code</label>
+      <span class="sp-field-value">{{ projectHeader.projectCode }}</span>
+    </div>
+    <div class="sp-header-field">
+      <label>Project Name</label>
+      <span class="sp-field-value">{{ projectHeader.projectName }}</span>
+    </div>
+    <div class="sp-header-field">
+      <label>Work Order</label>
+      <span class="sp-field-value">{{ projectHeader.workOrder }}</span>
+    </div>
+    <div class="sp-header-field">
+      <label>Owner</label>
+      <span class="sp-field-value">{{ projectHeader.owner }}</span>
+    </div>
+    <div class="sp-header-field">
+      <label>Emp ID</label>
+      <span class="sp-field-value">{{ projectHeader.employeeId }}</span>
+    </div>
+    <div class="sp-header-field">
+      <label>Project Status</label>
+      <span class="sp-field-value sp-status-badge">{{ projectHeader.projectStatus }}</span>
+    </div>
+  </div>
+
+  <!-- Back Navigation -->
+  <div class="sp-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard"><button  class="sp-back-button">
+      <i class="pi pi-chevron-left"></i> Back
+    </button></a>
+  </div>
+
+  <!-- Stage-wise Production Tracking Section -->
+  <div class="sp-production-section">
+    <!-- Gradient bar -->
+    <div class="sp-section-gradient"></div>
+    
+    <!-- HEADER + SEARCH -->
+    <div class="sp-header-row">
+      <div class="um-section-header">
+        <div class="um-section-title">
+          IN PROCESS PARTS STATUS
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="wb-table-search">
+        <i class="pi pi-search"></i>
+        <input
+          type="text"
+          placeholder="Search stages..."
+          (input)="onGlobalSearch($event)"
+        />
+      </div>
+    </div>
+
+    <!-- TABLE with PrimeNG p-table -->
+    <div class="um-table-wrapper">
+      <p-table
+        #dt
+        [value]="stagwiseExecutionData"
+        class="um-custom-table"
+        responsiveLayout="scroll"
+        [paginator]="stagwiseExecutionData.length > 5"
+        [rows]="5"
+        [globalFilterFields]="['stage', 'sheetmetalDescription', 'machinedDescription']"
+      >
+
+        <!-- HEADER -->
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              STAGE
+            </th>
+            <th>
+              Sheetmetal Parts
+            </th>
+            <th>
+              No of Parts
+            </th>
+            <th>
+              Machined Parts
+            </th>
+            <th>
+              No of Parts
+            </th>
+          </tr>
+        </ng-template>
+
+        <!-- BODY -->
+        <ng-template pTemplate="body" let-execution>
+          <tr class="um-table-row">
+            <td>{{ execution.stage }}</td>
+            <td>{{ execution.sheetmetalDescription }}</td>
+            <td>
+              <span class="sp-count-badge">
+                {{ execution.sheetmetalCount }}
+              </span>
+            </td>
+            <td>{{ execution.machinedDescription }}</td>
+            <td>
+              <span class="sp-count-badge">
+                {{ execution.machinedCount }}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+  </div>
+</div>
