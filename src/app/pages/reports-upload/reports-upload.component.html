@@ -1,1 +1,121 @@
-<p>reports-upload works!</p>
+<div class="um-root">
+
+  <div class="um-header-row" >
+    <div class="um-section-header">
+      <div class="um-section-title" >
+        Release 2 Demo Platform
+      </div>
+      <div class="um-section-desc">
+        User-friendly project-wise application aligned to Release 1 style and Release 2 PPT flow.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="um-project-header-card">
+    <div class="um-ph-item">
+      <span class="um-ph-label">Project Code:</span> {{ projectDetails.code }}
+    </div>
+    <div class="um-ph-item">
+      <span class="um-ph-label">Project Name:</span> {{ projectDetails.name }}
+    </div>
+    <div class="um-ph-item">
+      <span class="um-ph-label">Work Order:</span> {{ projectDetails.workOrder }}
+    </div>
+    <div class="um-ph-item">
+      <span class="um-ph-label">Owner:</span> {{ projectDetails.owner }}
+    </div>
+    <div class="um-ph-item">
+      <span class="um-ph-label">Emp ID:</span> {{ projectDetails.empId }}
+    </div>
+    <div class="um-ph-item">
+      <span class="um-ph-label">Project Status:</span> {{ projectDetails.status }}
+    </div>
+  </div>
+
+   <div class="sp-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard"><button  class="sp-back-button">
+      <i class="pi pi-chevron-left"></i> Back
+    </button></a>
+  </div>
+
+  <div class="um-table-section">
+    <div class="ru-section-header" >
+      <div class="um-section-title">Reports</div>
+     <div class="pd-search-box">
+      <i class="pi pi-search"></i>
+      <input type="text" placeholder="Search part / code / stage">
+    </div>
+    </div>
+
+    <div class="um-table-wrapper">
+      <p-table
+        #dt
+        [value]="reports"
+        class="um-custom-table"
+        responsiveLayout="scroll"
+        [globalFilterFields]="['material', 'reportName']"
+        [paginator]="reports.length > 5" 
+        [rows]="5"
+        sortMode="multiple"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th  pSortableColumn="material">
+              MATERIAL <p-sortIcon field="material"></p-sortIcon>
+            </th>
+            <th pSortableColumn="reportName">
+              REPORT NAME <p-sortIcon field="reportName"></p-sortIcon>
+            </th>
+            <th >REPORTS</th>
+            <th >COMMENTS</th>
+            <th >ACTION</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-report>
+          <tr class="um-table-row">
+            <td [ngClass]="{'um-text-bold': !report.isEditing}">
+              <ng-container *ngIf="!report.isEditing; else editMaterial">
+                {{ report.material }}
+              </ng-container>
+              <ng-template #editMaterial>
+                <p-dropdown [options]="materialsList" [(ngModel)]="report.material" placeholder="Select Material" appendTo="body" [style]="{'width':'100%'}"></p-dropdown>
+              </ng-template>
+            </td>
+
+            <td>
+              <ng-container *ngIf="!report.isEditing; else editReportName">
+                {{ report.reportName }}
+              </ng-container>
+              <ng-template #editReportName>
+                <p-dropdown [options]="reportTypes" [(ngModel)]="report.reportName" placeholder="Select Type" appendTo="body" [style]="{'width':'100%'}"></p-dropdown>
+              </ng-template>
+            </td>
+
+            <td>{{ report.reportsCount }}</td>
+
+            <td>
+              <ng-container *ngIf="!report.isEditing; else editComments">
+                <span class="um-badge" [ngClass]="{'um-badge-active': report.comments === 'Uploaded', 'um-badge-hold': report.comments === 'Pending review', 'um-badge-inactive': report.comments === 'Not linked'}">
+                  {{ report.comments || 'Pending' }}
+                </span>
+              </ng-container>
+              <ng-template #editComments>
+                <input type="text" pInputText [(ngModel)]="report.comments" placeholder="Comments..." style="width: 100%" />
+              </ng-template>
+            </td>
+
+            <td class="um-cell-actions" style="justify-content: center;">
+              <button pButton label="Upload" class="btn um-btn-secondary" (click)="handleUpload(report)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      
+      <div class="um-add-row-text" (click)="addNewRow()">
+        Click to Add Material
+      </div>
+    </div>
+  </div>
+</div>

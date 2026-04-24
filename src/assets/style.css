@@ -6227,10 +6227,9 @@ CONFIRM DIALOG - BRANCH GRADIENT UI
 }
 
 .pd-header-title h1 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 4px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
   letter-spacing: -0.5px;
 }
 
@@ -7324,7 +7323,7 @@ CONFIRM DIALOG - BRANCH GRADIENT UI
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px 0 0 0;
+  
 }
 
 /* ============================================
@@ -8436,7 +8435,49 @@ CONFIRM DIALOG - BRANCH GRADIENT UI
 
 
 
+.ru-section-header{
+  display: flex;
+  flex-direction: row;
+  gap:20px;
+  justify-content: space-between;
+  padding-bottom: 12px;
+}
 
+
+.um-project-header-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px; /* Pill-like border radius as per reference */
+  padding: 16px 24px;
+  margin-top: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  gap: 16px;
+}
+
+.um-ph-item {
+  font-size: 13px;
+  color: #334155;
+  display: flex;
+  flex-direction: column; /* Stacks label and value on smaller screens, can be row based on preference */
+  gap: 4px;
+}
+
+/* Optional override if you want inline styling like the image */
+@media (min-width: 768px) {
+  .um-ph-item {
+    flex-direction: row;
+    align-items: baseline;
+  }
+}
+
+.um-ph-label {
+  font-weight: 600;
+  color: #1a202c;
+}
 
 
 
