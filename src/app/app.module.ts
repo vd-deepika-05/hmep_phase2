@@ -30,11 +30,13 @@ import { TabViewModule } from 'primeng/tabview';
 import { CalendarModule } from 'primeng/calendar';
 import { InputSwitchModule } from 'primeng/inputswitch';
 
+import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
 import { BadgeModule } from 'primeng/badge';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TagModule } from 'primeng/tag';
 import { LoginComponent } from './login/login.component';
+
 
 import { ModuleLayoutComponent } from './layout/module-layout/module-layout.component';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -105,6 +107,7 @@ import { PaintCheckComponent } from './pages/paint-check/paint-check.component';
     TagModule,
     ConfirmDialogModule ,
     FileUploadModule,
+    DialogModule,
    
     HttpClientModule   // <-- ADD HERE
   ],

@@ -8528,3 +8528,1616 @@ CONFIRM DIALOG - BRANCH GRADIENT UI
 
 
 
+
+
+
+
+
+
+/* ============================================
+   BILLING READINESS COMPONENT STYLES
+   Custom Class Names with "br" Prefix
+   Responsive Design for All Devices
+   ============================================ */
+
+/* Root Container */
+.br-root {
+  width: 100%;
+  padding: 0;
+  background: #f8fafc;
+}
+
+/* ============================================
+   HEADER ROW SECTION
+   ============================================ */
+
+.br-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.br-section-header {
+  flex: 1;
+}
+
+.br-section-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.br-section-desc {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   PROJECT HEADER CARD
+   ============================================ */
+
+.br-project-header-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 12px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  gap: 16px;
+}
+
+.br-ph-item {
+  font-size: 13px;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.br-ph-label {
+  font-weight: 600;
+  color: #1a202c;
+}
+
+/* ============================================
+   BACK NAVIGATION
+   ============================================ */
+
+.br-back-navigation {
+  margin-bottom: 16px;
+}
+
+.br-back-button {
+      display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0f172a;
+    transition: all 0.2s ease;
+}
+
+.br-back-button:hover {
+  background: #f8fafc;
+    border-color: #cbd5e1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.br-back-button i {
+  font-size: 14px;
+}
+
+/* ============================================
+   SECTION STYLING
+   ============================================ */
+
+.br-section {
+  margin-bottom: 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: #ffffff;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.br-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin: 0 -16px 16px -16px;
+  padding: 0px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+}
+
+.br-section-heading-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #1A202C;
+  letter-spacing: -0.5px;
+}
+
+.br-section-heading-desc {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* ============================================
+   STATUS CARDS GRID
+   ============================================ */
+
+.br-status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.br-status-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 20px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.br-status-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+}
+
+.br-status-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.br-status-value {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 0;
+  border-radius: 0;
+  margin: 0;
+  display: inline-block;
+  text-align: left;
+  min-width: auto;
+  background: none;
+}
+
+/* Status Color Classes */
+.br-status-completed {
+  color: #1a202c;
+}
+
+.br-status-approved {
+  color: #1a202c;
+}
+
+.br-status-resolved {
+  color: #1a202c;
+}
+
+.br-status-done {
+  color: #1a202c;
+}
+
+.br-status-pending {
+  color: #1a202c;
+}
+
+.br-status-failed {
+  color: #1a202c;
+}
+
+.br-status-desc {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+  text-align: left;
+  line-height: 1.4;
+}
+
+/* ============================================
+   VALIDATION ALERT
+   ============================================ */
+
+.br-validation-alert {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  align-items: flex-start;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.br-alert-success {
+  background: #f0fdf4;
+  border-color: #86efac;
+}
+
+.br-alert-success i {
+  color: #16a34a;
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.br-alert-warning {
+  background: #fef3c7;
+  border-color: #fcd34d;
+}
+
+.br-alert-warning i {
+  color: #d97706;
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.br-alert-content {
+  flex: 1;
+}
+
+.br-alert-title {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: #1a202c;
+}
+
+.br-alert-desc {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================
+   VALIDATION LIST
+   ============================================ */
+
+.br-validation-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.br-validation-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.br-validation-item i {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.br-valid {
+  background: #f0fdf4;
+  border-color: #86efac;
+  color: #065f46;
+}
+
+.br-ph-value{
+font-size: 12px;
+  color: rgb(100, 116, 139);
+}
+
+.br-valid i {
+  color: #16a34a;
+}
+
+.br-invalid {
+  background: #fef2f2;
+  border-color: #fca5a5;
+  color: #7f1d1d;
+}
+
+.br-invalid i {
+  color: #dc2626;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - DESKTOP (1024px+)
+   ============================================ */
+
+@media (min-width: 1024px) {
+  .br-status-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .br-validation-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET (1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .br-section-title {
+    font-size: 20px;
+  }
+
+  .br-section-desc {
+    font-size: 12px;
+  }
+
+  .br-project-header-card {
+    padding: 12px 20px;
+    gap: 12px;
+  }
+
+  .br-ph-item {
+    font-size: 12px;
+    flex: 1 1 calc(50% - 6px);
+  }
+
+  .br-status-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .br-status-value {
+    font-size: 15px;
+    padding: 8px 12px;
+    min-width: 90px;
+  }
+
+  .br-status-desc {
+    font-size: 11px;
+  }
+
+  .br-validation-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET (768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .br-header-row {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .br-section-title {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .br-section-desc {
+    font-size: 11px;
+  }
+
+  .br-project-header-card {
+    padding: 10px 16px;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .br-ph-item {
+    font-size: 12px;
+    flex: 1 1 calc(50% - 5px);
+    min-width: auto;
+  }
+
+  .br-back-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .br-status-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .br-status-value {
+    font-size: 14px;
+    padding: 6px 10px;
+    min-width: 80px;
+  }
+
+  .br-status-body {
+    padding: 12px;
+  }
+
+  .br-status-header {
+    padding: 10px 12px;
+  }
+
+  .br-status-label {
+    font-size: 10px;
+  }
+
+  .br-status-desc {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+
+  .br-section-heading {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+
+  .br-validation-list {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .br-validation-item {
+    padding: 10px 12px;
+    font-size: 12px;
+    gap: 10px;
+  }
+
+  .br-validation-item i {
+    font-size: 14px;
+  }
+
+  .br-alert-success i,
+  .br-alert-warning i {
+    font-size: 18px;
+    margin-top: 1px;
+  }
+
+  .br-alert-title {
+    font-size: 12px;
+  }
+
+  .br-alert-desc {
+    font-size: 11px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE (480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .br-root {
+    padding: 0;
+  }
+
+  .br-header-row {
+    margin-bottom: 16px;
+  }
+
+  .br-section-title {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  .br-section-desc {
+    font-size: 10px;
+  }
+
+  .br-project-header-card {
+    padding: 8px 12px;
+    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 10px;
+  }
+
+  .br-ph-item {
+    font-size: 11px;
+    flex: 1 1 100%;
+    min-width: 100%;
+    white-space: normal;
+  }
+
+  .br-back-navigation {
+    margin-bottom: 12px;
+  }
+
+  .br-back-button {
+    width: 100%;
+    justify-content: center;
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .br-section {
+    margin-bottom: 18px;
+  }
+
+  .br-section-heading {
+    font-size: 11px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+
+  .br-status-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .br-status-card {
+    border-radius: 8px;
+  }
+
+  .br-status-header {
+    padding: 8px 10px;
+    background: #f1f5f9;
+  }
+
+  .br-status-label {
+    font-size: 9px;
+  }
+
+  .br-status-body {
+    padding: 10px;
+  }
+
+  .br-status-value {
+    font-size: 13px;
+    padding: 6px 10px;
+    min-width: 70px;
+    margin-bottom: 6px;
+  }
+
+  .br-status-desc {
+    font-size: 10px;
+    margin: 0;
+  }
+
+  .br-validation-alert {
+    padding: 12px;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .br-alert-success i,
+  .br-alert-warning i {
+    font-size: 16px;
+    margin-top: 1px;
+  }
+
+  .br-alert-title {
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  .br-alert-desc {
+    font-size: 10px;
+  }
+
+  .br-validation-list {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .br-validation-item {
+    padding: 8px 10px;
+    font-size: 11px;
+    gap: 8px;
+    border-radius: 6px;
+  }
+
+  .br-validation-item i {
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - SMALL MOBILE (320px)
+   ============================================ */
+
+@media (max-width: 320px) {
+  .br-section-title {
+    font-size: 14px;
+  }
+
+  .br-section-desc {
+    font-size: 9px;
+  }
+
+  .br-ph-item {
+    font-size: 10px;
+  }
+
+  .br-back-button {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  .br-section-heading {
+    font-size: 10px;
+    margin-bottom: 8px;
+  }
+
+  .br-status-value {
+    font-size: 12px;
+    padding: 5px 8px;
+    min-width: 60px;
+  }
+
+  .br-status-desc {
+    font-size: 9px;
+  }
+
+  .br-validation-item {
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+
+  .br-alert-title {
+    font-size: 10px;
+  }
+
+  .br-alert-desc {
+    font-size: 9px;
+  }
+}
+/* ============================================
+   RESPONSIVE DESIGN - HEADING
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .br-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .br-section-heading-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .br-section-heading {
+    margin: 0 -12px 16px -12px;
+    padding: 10px 12px;
+  }
+
+  .br-section-heading-title {
+    font-size: 15px;
+  }
+
+  .br-section-heading-desc {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .br-section-heading {
+    margin: 0 -8px 12px -8px;
+    padding: 8px 8px;
+  }
+
+  .br-section-heading-title {
+    font-size: 14px;
+  }
+
+  .br-section-heading-desc {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .br-section-heading {
+    margin: 0 -4px 10px -4px;
+    padding: 6px 4px;
+  }
+
+  .br-section-heading-title {
+    font-size: 12px;
+  }
+
+  .br-section-heading-desc {
+    font-size: 9px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .br-back-button,
+  .br-back-navigation {
+    display: none;
+  }
+
+  .br-status-card {
+    page-break-inside: avoid;
+  }
+
+  .br-validation-item {
+    page-break-inside: avoid;
+  }
+}
+
+
+
+
+
+
+
+
+
+.ru-cell-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #60a5fa;
+}
+
+.ru-btn-secondary {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  color: white;
+  background-color: #4f46e5;
+}
+
+.ru-btn-secondary:hover {
+  background-color: #60a5fa;
+}
+
+
+
+
+
+.ru-btn-material{border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  color: white;
+  background-color: #4f46e5;
+width:15%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ru-cell-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #60a5fa;
+}
+
+.ru-btn-secondary {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  align-items: center;
+  gap: 6px;
+  font-family: inherit;
+  color: white;
+  background-color: #4f46e5;
+}
+
+.ru-btn-secondary:hover {
+  background-color: #60a5fa;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   DETAIL BOM COMPONENT – SCSS
+   Follows the exact naming conventions and CSS patterns of
+   the project's existing db-* class system.
+   No :root variables. font-family is inherited from global.
+   ============================================================ */
+
+/* ─── Extracted Inline Styles ───────────────────────────── */
+.db-project-info-item-first {
+  padding-left: 0;
+}
+
+.db-hidden-input {
+  display: none;
+}
+
+.db-success-icon {
+  color: #16a34a;
+  font-size: 15px;
+}
+
+.db-preview-col-partno {
+  min-width: 90px;
+  font-size: 12px;
+}
+
+.db-preview-col-name {
+  flex: 1;
+  font-size: 12px;
+  color: #475569;
+}
+
+.db-preview-col-qty {
+  font-size: 11px;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.db-form-field-spaced {
+  margin-bottom: 14px;
+}
+
+.db-cloud-upload-icon {
+  font-size: 26px;
+  color: #94a3b8;
+}
+
+.db-btn-small {
+  font-size: 11px !important;
+  padding: 5px 10px !important;
+}
+
+/* ─── PrimeNG Dialog Extracted Widths ──────────────────── */
+.db-dialog-lg {
+  width: 92vw !important;
+  max-width: 760px !important;
+}
+
+.db-dialog-md {
+  width: 92vw !important;
+  max-width: 560px !important;
+}
+
+.db-dialog-sm {
+  width: 92vw !important;
+  max-width: 520px !important;
+}
+
+.db-dialog-xl {
+  width: 92vw !important;
+  max-width: 900px !important;
+}
+
+/* ─── Root wrapper ─────────────────────────────────────── */
+.db-root {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+  padding: 0 0 32px 0;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* ─── Shared header row (title + actions on same line) ─── */
+.db-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+/* ─── Section header ───────────────────────────────────── */
+.db-section-header {
+  margin-bottom: 0;
+}
+
+.db-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 4px 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-section-desc {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* ─── Project Info Bar ─────────────────────────────────── */
+
+
+/* ─── Back Button Row ──────────────────────────────────── */
+.db-back-row {
+  padding: 12px 20px 0 20px;
+}
+
+.db-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  padding: 4px 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+  transition: color 0.15s;
+}
+
+.db-back-btn i {
+  font-size: 12px;
+}
+
+.db-back-btn:hover {
+  color: #1a202c;
+}
+
+/* ─── BOM Action Buttons (header row right side) ───────── */
+.db-bom-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ─── Table Section ────────────────────────────────────── */
+.db-table-section {
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  padding: 18px 20px 4px 20px;
+  margin: 14px 20px 0 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* ─── Table Wrapper ─────────────────────────────────────  */
+.db-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y:auto;
+}
+
+/* ─── PrimeNG Table Overrides ──────────────────────────── */
+.db-custom-table.p-datatable .p-datatable-thead > tr > th {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 11px 14px !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  white-space: nowrap;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif !important;
+}
+
+.db-custom-table.p-datatable .p-datatable-tbody > tr > td {
+  padding: 11px 14px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  font-size: 13px !important;
+  color: #374151 !important;
+  vertical-align: middle;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif !important;
+}
+
+.db-custom-table.p-datatable .p-datatable-tbody > tr:last-child > td {
+  border-bottom: none !important;
+}
+
+.db-custom-table.p-datatable .p-datatable-tbody > tr:hover > td {
+  background: #f8fafc !important;
+}
+
+.db-custom-table .p-paginator {
+  padding: 10px 14px !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
+  font-size: 12px !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif !important;
+}
+
+.db-custom-table .p-paginator .p-paginator-current {
+  color: #64748b !important;
+  font-size: 12px !important;
+}
+
+.db-custom-table .p-paginator .p-paginator-page.p-highlight {
+  background: linear-gradient(135deg, #00a5cf, #004e64);
+  height: 30px;
+  width: 10px !important;
+  color: #fff !important;
+  border-color: #3b82f6 !important;
+  border-radius: 6px !important;
+}
+
+.db-custom-table .p-sortable-column-icon {
+  color: #1b56a8 !important;
+  font-size: 5px !important;
+}
+
+/* ─── Table row & cell helpers ──────────────────────────── */
+.db-table-row {
+  transition: background 0.15s;
+}
+
+.db-cell-clickable {
+  cursor: pointer;
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.db-cell-clickable:hover {
+  text-decoration: underline;
+}
+
+.db-text-bold {
+  font-weight: 600;
+  color: #1a202c !important;
+}
+
+/* ─── Status badge ──────────────────────────────────────── */
+.db-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  gap: 5px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.db-badge-active {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.db-badge-active::before {
+  background: #16a34a;
+}
+
+.db-badge-inactive {
+  background: #fff1f2;
+  color: #dc2626;
+  border: 1px solid #fecdd3;
+}
+
+.db-badge-inactive::before {
+  background: #dc2626;
+}
+
+.db-badge-hold {
+  background: #fef9c3;
+  color: #ca8a04;
+  border: 1px solid #fde68a;
+}
+
+.db-badge-hold::before {
+  background: #ca8a04;
+}
+
+/* ─── Part Type Tag ─────────────────────────────────────── */
+.db-part-type-tag {
+  display: inline-block;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  white-space: nowrap;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+/* ─── Stage Chip ────────────────────────────────────────── */
+.db-stage-chip {
+  display: inline-block;
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  white-space: nowrap;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+/* ─── Action buttons in table ───────────────────────────── */
+.db-cell-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ─── Update button in table ────────────────────────────── */
+.db-update-btn.p-button {
+  font-size: 11px !important;
+  padding: 5px 12px !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif !important;
+}
+
+/* ─── Shared Button Styles ──────────────────────────────── */
+.db-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 7px 14px;
+  border: none;
+  transition: all 0.15s ease;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-btn i {
+  font-size: 11px;
+}
+
+.db-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.db-btn.db-primary {
+  background: linear-gradient(135deg, #00a5cf, #004e64);
+  color: #ffffff;
+  border: 1px solid transparent;
+}
+
+.db-btn.db-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0096bb, #003d50);
+  box-shadow: 0 2px 8px rgba(0, 78, 100, 0.25);
+}
+
+.db-btn.db-outline-btn {
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.db-btn.db-outline-btn:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #9ca3af;
+  color: #1a202c;
+}
+
+/* ─── Dialog Styles ─────────────────────────────────────── */
+.db-dialog .p-dialog-header {
+  padding: 16px 20px 2px !important;
+  margin-left: 20   px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.db-dialog .p-dialog-header .p-dialog-title {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #1a202c !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif !important;
+}
+
+.db-dialog .p-dialog-content {
+  padding: 20px !important;
+}
+
+.db-dialog .p-dialog-footer {
+  padding: 12px 20px !important;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* ─── Form Grid ─────────────────────────────────────────── */
+.db-form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+}
+
+.db-form-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.db-form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 220px;
+}
+
+.db-form-field.db-form-field-full {
+  flex: 1 1 100%;
+}
+
+.db-form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-required {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.db-form-input,
+.db-form-select,
+.db-form-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #1a202c;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-form-input:focus,
+.db-form-select:focus,
+.db-form-textarea:focus {
+  border-color: #00a5cf;
+  box-shadow: 0 0 0 3px rgba(0, 165, 207, 0.12);
+}
+
+.db-form-input::placeholder,
+.db-form-textarea::placeholder {
+  color: #94a3b8;
+}
+
+.db-form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+  cursor: pointer;
+}
+
+.db-form-textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+/* ─── Dialog Footer ─────────────────────────────────────── */
+.db-dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ─── Update Info Row (inside update dialog) ─────────────  */
+.db-update-info-row {
+  display: flex;
+  gap: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.db-update-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.db-update-info-label {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-update-info-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a202c;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+/* ─── Upload Zone ───────────────────────────────────────── */
+.db-upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.db-upload-zone:hover {
+  border-color: #00a5cf;
+  background: #f0fdfe;
+}
+
+.db-upload-zone-active {
+  border-color: #00a5cf;
+  background: #e6f9fc;
+}
+
+.db-upload-icon {
+  font-size: 36px;
+  color: #16a34a;
+}
+
+.db-upload-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-upload-hint {
+  font-size: 11px;
+  color: #94a3b8;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+.db-upload-filename {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Inter", sans-serif;
+}
+
+/* IMAGE CELL FIX */
+/* 🔥 CRITICAL FIX */
+.db-cell-image {
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+  text-align: center;
+}
+
+/* 🔥 IMAGE ALWAYS SMALL */
+.db-img-thumb {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+}
+
+/* 🔥 PREVIEW FIX */
+.db-image-preview-full {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.db-img-thumb:hover {
+  transform: scale(1.08);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* PLACEHOLDER */
+.db-img-placeholder {
+  width: 60px;
+  height: 60px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #94a3b8;
+}
+
+.db-image-preview-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.db-custom-table th,
+.db-custom-table td {
+  text-align: center !important;
+}
+
+/* keep text fields slightly left aligned */
+.db-custom-table td:nth-child(2) {
+  text-align: left !important;
+}
+
+/* ERROR STATE */
+.db-input-error {
+  border-color: #dc2626 !important;
+}
+
+.db-error-text {
+  font-size: 11px;
+  color: #dc2626;
+}
+
+/* SUCCESS TEXT */
+.db-upload-success {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #16a34a;
+}

@@ -1,1 +1,531 @@
-<p>detail-bom works!</p>
+<div class="db-root">
+
+
+  <div class="pd-project-header-card">
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Project Code:</span> <span class="pd-ph-value">{{ projectDetails.projectCode }}</span>
+    </div>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Project Name:</span> <span class="pd-ph-value">{{ projectDetails.projectName }}</span>
+    </div>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Work Order:</span> <span class="pd-ph-value">{{ projectDetails.workOrder }}</span>
+    </div>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Owner:</span> <span class="pd-ph-value">{{ projectDetails.projectOwner }}</span>
+    </div>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Emp ID:</span> <span class="pd-ph-value">{{ projectDetails.empId }}</span>
+    </div>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Project Status:</span> <span class="pd-status-badge">{{ projectDetails.projectStatus }}</span>
+    </div>
+  </div>
+
+
+ <div class="br-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard">
+      <button class="br-back-button">
+        <i class="pi pi-chevron-left"></i> Back
+      </button>
+    </a>
+  </div>
+
+  <div class="db-table-section">
+    <div class="db-header-row">
+      <div class="db-section-header">
+        <div class="db-section-title">Bill of Material</div>
+      </div>
+      <div class="db-bom-actions">
+        <button class="db-btn db-outline-btn" (click)="openAddDialog()">
+          <i class="pi pi-plus"></i> ADD NEW LINE ITEM
+        </button>
+        <button class="db-btn db-outline-btn" (click)="openUploadDialog()">
+          <i class="pi pi-upload"></i> UPLOAD EXCEL FILE
+        </button>
+        <button class="db-btn db-outline-btn" (click)="openLinkImageDialog(null)">
+          <i class="pi pi-image"></i> LINK IMAGE
+        </button>
+      </div>
+    </div>
+
+
+    <!-- BOM Table
+     FOR DESABLEING THE PAGINATIOR JUST CHNAGE FROM TRUE TO FALSE -->
+    <div class="db-table-wrapper">
+      <p-table
+        #dt
+        [value]="bomLines"
+        class="db-custom-table"
+        responsiveLayout="scroll"
+       [paginator]="false"      
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [globalFilterFields]="['partNo','partName','drawingNo','excelFileName','partType']"
+        sortMode="multiple"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="partNo">Part No <p-sortIcon field="partNo"></p-sortIcon></th>
+            <th pSortableColumn="partName">Part Name <p-sortIcon field="partName"></p-sortIcon></th>
+            <th pSortableColumn="drawingNo">Drawing No <p-sortIcon field="drawingNo"></p-sortIcon></th>
+            <th pSortableColumn="excelFileName">Excel File <p-sortIcon field="excelFileName"></p-sortIcon></th>
+            <th pSortableColumn="partType">Part Type <p-sortIcon field="partType"></p-sortIcon></th>
+            <th pSortableColumn="qty">Qty <p-sortIcon field="qty"></p-sortIcon></th>
+            <th pSortableColumn="currentStage">Current Stage <p-sortIcon field="currentStage"></p-sortIcon></th>
+            <th>Status</th>
+            <th>Image</th>
+            <th>Action</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-row>
+          <tr class="db-table-row">
+            <td class="db-text-bold">{{ row.partNo }}</td>
+            <td>{{ row.partName }}</td>
+            <td>{{ row.drawingNo }}</td>
+            <td>
+              <span class="db-file-chip" [class.db-file-chip-empty]="!row.excelFileName">
+                {{ row.excelFileName || '—' }}
+              </span>
+            </td>
+            <td><span class="db-part-type-tag">{{ row.partType }}</span></td>
+            <td class="db-text-bold">{{ row.qty }}</td>
+            <td><span class="db-stage-chip">{{ row.currentStage }}</span></td>
+            <td>
+              <span
+                class="db-badge"
+                [ngClass]="{
+                  'db-badge-active'   : row.status === 'In Process',
+                  'db-badge-hold'     : row.status === 'Pending',
+                  'db-badge-inactive' : row.status === 'Rejected',
+                  'db-badge-completed': row.status === 'Completed'
+                }"
+              >
+                {{ row.status }}
+              </span>
+            </td>
+
+            <td class="db-cell-image">
+              <img
+                *ngIf="row.image; else noImg"
+                [src]="row.image"
+                class="db-img-thumb"
+                (click)="openImagePreview(row.image)"
+                title="Click to preview"
+                alt="Linked image thumbnail"
+              />
+              <ng-template #noImg>
+                <div class="db-img-placeholder" (click)="openLinkImageDialog(row)" title="Link image">
+                  <i class="pi pi-image"></i>
+                </div>
+              </ng-template>
+            </td>
+
+            <td class="db-cell-actions">
+              <button
+                pButton
+                label="Update Parts"
+                class="db-btn db-primary db-update-btn"
+                (click)="openUpdateDialog(row)">
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="10" class="db-empty-state">
+              <i class="pi pi-inbox"></i>
+              No line items found. Add one using <strong>ADD NEW LINE ITEM</strong> or upload via Excel.
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </div>
+
+  </div>
+
+
+  <p-dialog
+    [header]="'Update Parts — ' + (selectedPart?.partNo || '')"
+    [(visible)]="showUpdateDialog"
+    [modal]="true"
+    styleClass="db-dialog db-dialog-lg"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="selectedPart = null"
+  >
+    <div class="db-form-grid" *ngIf="selectedPart">
+
+      <div class="db-update-info-row">
+        <div class="db-update-info-item">
+          <span class="db-update-info-label">Part Name</span>
+          <span class="db-update-info-value">{{ selectedPart.partName }}</span>
+        </div>
+        <div class="db-update-info-item">
+          <span class="db-update-info-label">Drawing No</span>
+          <span class="db-update-info-value">{{ selectedPart.drawingNo }}</span>
+        </div>
+        <div class="db-update-info-item">
+          <span class="db-update-info-label">Part Type</span>
+          <span class="db-update-info-value">{{ selectedPart.partType }}</span>
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field">
+          <label class="db-form-label">Part No <span class="db-required">*</span></label>
+          <input type="text" class="db-form-input" [(ngModel)]="selectedPart.partNo" />
+        </div>
+        <div class="db-form-field">
+          <label class="db-form-label">Part Name <span class="db-required">*</span></label>
+          <input type="text" class="db-form-input" [(ngModel)]="selectedPart.partName" />
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field">
+          <label class="db-form-label">Drawing No <span class="db-required">*</span></label>
+          <input type="text" class="db-form-input" [(ngModel)]="selectedPart.drawingNo" />
+        </div>
+        <div class="db-form-field">
+          <label class="db-form-label">Part Type <span class="db-required">*</span></label>
+          <select class="db-form-select" [(ngModel)]="selectedPart.partType">
+            <option *ngFor="let pt of partTypes" [value]="pt">{{ pt }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field">
+          <label class="db-form-label">Quantity <span class="db-required">*</span></label>
+          <input type="number" class="db-form-input" [(ngModel)]="selectedPart.qty" min="1" />
+        </div>
+        <div class="db-form-field">
+          <label class="db-form-label">Current Stage</label>
+          <select class="db-form-select" [(ngModel)]="selectedPart.currentStage">
+            <option *ngFor="let s of stages" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field db-form-field-full">
+          <label class="db-form-label">Excel File</label>
+          <input
+            type="text"
+            class="db-form-input"
+            placeholder="Optional source file name"
+          />
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field">
+          <label class="db-form-label">Status</label>
+          <select class="db-form-select" [(ngModel)]="selectedPart.status">
+            <option value="In Process">In Process</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field db-form-field-full">
+          <label class="db-form-label">Remarks</label>
+          <textarea
+            class="db-form-textarea"
+            [(ngModel)]="selectedPart.remarks"
+            placeholder="Add remarks or notes..."
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="db-dialog-footer">
+        <button class="db-btn db-outline-btn" (click)="showUpdateDialog = false">Cancel</button>
+        <button class="db-btn db-primary" (click)="saveUpdate()">Save Update</button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    header="Add New Line Item"
+    [(visible)]="showAddDialog"
+    [modal]="true"
+    styleClass="db-dialog db-dialog-lg"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="resetNewLine()"
+  >
+    <div class="db-form-grid">
+      <div class="db-form-row">
+        <div class="db-form-field">
+          <label class="db-form-label">Part No <span class="db-required">*</span></label>
+          <input
+            type="text"
+            class="db-form-input"
+            [(ngModel)]="newLine.partNo"
+            placeholder="e.g. PART004"
+            [class.db-input-error]="addSubmitted && !newLine.partNo"
+          />
+          <span class="db-error-text" *ngIf="addSubmitted && !newLine.partNo">Part No is required</span>
+        </div>
+        <div class="db-form-field">
+          <label class="db-form-label">Part Name <span class="db-required">*</span></label>
+          <input
+            type="text"
+            class="db-form-input"
+            [(ngModel)]="newLine.partName"
+            placeholder="Enter part name"
+            [class.db-input-error]="addSubmitted && !newLine.partName"
+          />
+          <span class="db-error-text" *ngIf="addSubmitted && !newLine.partName">Part Name is required</span>
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field">
+          <label class="db-form-label">Drawing No <span class="db-required">*</span></label>
+          <input
+            type="text"
+            class="db-form-input"
+            [(ngModel)]="newLine.drawingNo"
+            placeholder="e.g. DWG-004"
+            [class.db-input-error]="addSubmitted && !newLine.drawingNo"
+          />
+          <span class="db-error-text" *ngIf="addSubmitted && !newLine.drawingNo">Drawing No is required</span>
+        </div>
+        <div class="db-form-field">
+          <label class="db-form-label">Part Type <span class="db-required">*</span></label>
+          <select
+            class="db-form-select"
+            [(ngModel)]="newLine.partType"
+            [class.db-input-error]="addSubmitted && !newLine.partType"
+          >
+            <option value="">— Select —</option>
+            <option *ngFor="let pt of partTypes" [value]="pt">{{ pt }}</option>
+          </select>
+          <span class="db-error-text" *ngIf="addSubmitted && !newLine.partType">Part Type is required</span>
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field">
+          <label class="db-form-label">Quantity <span class="db-required">*</span></label>
+          <input
+            type="number"
+            class="db-form-input"
+            [(ngModel)]="newLine.qty"
+            placeholder="Enter qty"
+            min="1"
+            [class.db-input-error]="addSubmitted && !newLine.qty"
+          />
+          <span class="db-error-text" *ngIf="addSubmitted && !newLine.qty">Quantity is required</span>
+        </div>
+        <div class="db-form-field">
+          <label class="db-form-label">Current Stage</label>
+          <select class="db-form-select" [(ngModel)]="newLine.currentStage">
+            <option *ngFor="let s of stages" [value]="s">{{ s }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field db-form-field-full">
+          <label class="db-form-label">Excel File</label>
+          <input
+            type="text"
+            class="db-form-input"
+            placeholder="Optional source file name"
+          />
+        </div>
+      </div>
+
+      <div class="db-form-row">
+        <div class="db-form-field db-form-field-full">
+          <label class="db-form-label">Remarks</label>
+          <textarea
+            class="db-form-textarea"
+            [(ngModel)]="newLine.remarks"
+            placeholder="Optional notes..."
+            rows="3"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="db-dialog-footer">
+        <button class="db-btn db-outline-btn" (click)="showAddDialog = false">Cancel</button>
+        <button class="db-btn db-primary" (click)="saveNewLine()">Add Line Item</button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    header="Upload Excel File"
+    [(visible)]="showUploadDialog"
+    [modal]="true"
+    styleClass="db-dialog db-dialog-md"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="resetUpload()"
+  >
+    <div
+      class="db-upload-zone"
+      [class.db-upload-zone-active]="isDragOver"
+      (click)="excelFileInput.click()"
+      (dragover)="onDragOver($event)"
+      (dragleave)="isDragOver = false"
+      (drop)="onFileDrop($event)"
+    >
+      <i class="pi pi-file-excel db-upload-icon"></i>
+      <div class="db-upload-title">Click to upload or drag &amp; drop</div>
+      <div class="db-upload-hint">.xlsx, .xls, or .csv — columns: Part No, Part Name, Drawing No, Part Type, Qty</div>
+      <input
+        #excelFileInput
+        type="file"
+        accept=".xlsx,.xls,.csv"
+        class="db-hidden-input"
+        (change)="onExcelFileSelected($event)"
+      />
+    </div>
+
+    <div class="db-upload-success" *ngIf="uploadedFileName">
+      <i class="pi pi-check-circle db-success-icon"></i>
+      <span>{{ uploadedFileName }}</span>
+    </div>
+
+    <div class="db-excel-preview" *ngIf="importPreviewRows.length > 0">
+      <div class="db-excel-preview-title">Preview — {{ importPreviewRows.length }} row(s) to be added</div>
+      <div class="db-excel-preview-rows">
+        <div class="db-excel-preview-row" *ngFor="let r of importPreviewRows">
+          <span class="db-text-bold db-preview-col-partno">{{ r.partNo }}</span>
+          <span class="db-preview-col-name">{{ r.partName }}</span>
+          <span class="db-part-type-tag">{{ r.partType }}</span>
+          <span class="db-preview-col-qty">Qty: {{ r.qty }}</span>
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="db-dialog-footer">
+        <button class="db-btn db-outline-btn" (click)="showUploadDialog = false">Cancel</button>
+        <button class="db-btn db-primary" [disabled]="importPreviewRows.length === 0" (click)="confirmImport()">
+          Add {{ importPreviewRows.length > 0 ? importPreviewRows.length : '' }} Row(s) to Table
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    [header]="linkImageTargetRow ? 'Link Image — ' + linkImageTargetRow.partNo : 'Link Image to Part'"
+    [(visible)]="showLinkImageDialog"
+    [modal]="true"
+    styleClass="db-dialog db-dialog-sm"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="resetLinkImage()"
+  >
+    <div class="db-link-image-body">
+
+      <div class="db-link-image-hint" *ngIf="!linkImageTargetRow">
+        No specific part selected. Choose a part below before linking.
+      </div>
+
+      <div class="db-form-field db-form-field-spaced" *ngIf="!linkImageTargetRow">
+        <label class="db-form-label">Select Part <span class="db-required">*</span></label>
+        <select class="db-form-select" [(ngModel)]="selectedPartForLink">
+          <option [ngValue]="null">— Select a part —</option>
+          <option *ngFor="let row of bomLines" [ngValue]="row">{{ row.partNo }} — {{ row.partName }}</option>
+        </select>
+      </div>
+
+      <div
+        class="db-link-upload-zone"
+        (click)="imgFileInput.click()"
+        [class.db-link-zone-has-image]="selectedLinkImagePreview"
+      >
+        <ng-container *ngIf="!selectedLinkImagePreview">
+          <i class="pi pi-cloud-upload db-cloud-upload-icon"></i>
+          <span class="db-link-upload-label">Click to upload an image</span>
+          <span class="db-link-upload-hint">JPG, PNG, GIF, WEBP supported</span>
+        </ng-container>
+        <img
+          *ngIf="selectedLinkImagePreview"
+          [src]="selectedLinkImagePreview"
+          class="db-link-preview-img"
+          alt="Selected image preview"
+        />
+        <input
+          #imgFileInput
+          type="file"
+          accept="image/*"
+          class="db-hidden-input"
+          (change)="onImageFileSelected($event)"
+        />
+      </div>
+
+      <div class="db-link-reupload" *ngIf="selectedLinkImagePreview">
+        <button class="db-btn db-outline-btn db-btn-small" (click)="imgFileInput.click()">
+          <i class="pi pi-refresh"></i> Change Image
+        </button>
+      </div>
+
+      <div class="db-link-library" *ngIf="imageLibrary.length > 0">
+        <div class="db-link-library-title">Or select from library</div>
+        <div class="db-link-library-grid">
+          <div
+            *ngFor="let img of imageLibrary"
+            class="db-link-library-item"
+            [class.db-link-library-item-selected]="selectedLinkImagePreview === img.src"
+            (click)="selectLibraryImage(img.src)"
+          >
+            <img [src]="img.src" [alt]="img.name" />
+            <span class="db-link-library-name">{{ img.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="db-dialog-footer">
+        <button class="db-btn db-outline-btn" (click)="showLinkImageDialog = false">Cancel</button>
+        <button
+          class="db-btn db-primary"
+          [disabled]="!selectedLinkImagePreview || (!linkImageTargetRow && !selectedPartForLink)"
+          (click)="saveLinkImage()"
+        >
+          Link Image
+        </button>
+      </div>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    header="Image Preview"
+    [(visible)]="showImagePreviewDialog"
+    [modal]="true"
+    styleClass="db-dialog db-dialog-xl"
+    [draggable]="false"
+    [resizable]="false"
+  >
+    <div class="db-image-preview-wrapper">
+      <img [src]="previewImageSrc" class="db-image-preview-full" alt="Preview" />
+    </div>
+    <ng-template pTemplate="footer">
+      <div class="db-dialog-footer">
+        <button class="db-btn db-outline-btn" (click)="showImagePreviewDialog = false">Close</button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>
