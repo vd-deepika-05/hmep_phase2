@@ -1,37 +1,27 @@
 <div class="sp-root">
-  <div class="pd-header-title">
-      <h1>Release 2 Demo Platform</h1>
-      <p>User-friendly project-wise application aligned to Release 1 style and Release 2 PPT flow.</p>
-    </div>
-
   <div class="sp-project-header-card">
     <div class="sp-header-field">
-      <label>Project Code</label>
-      <span class="sp-field-value">{{ projectHeader.projectCode }}</span>
+      <span class="sp-header-label">Project Code:</span> <span class="sp-header-value">{{ projectHeader.projectCode }}</span>
     </div>
     <div class="sp-header-field">
-      <label>Project Name</label>
-      <span class="sp-field-value">{{ projectHeader.projectName }}</span>
+      <span class="sp-header-label">Project Name:</span> <span class="sp-header-value">{{ projectHeader.projectName }}</span>
     </div>
     <div class="sp-header-field">
-      <label>Work Order</label>
-      <span class="sp-field-value">{{ projectHeader.workOrder }}</span>
+      <span class="sp-header-label">Work Order:</span> <span class="sp-header-value">{{ projectHeader.workOrder }}</span>
     </div>
     <div class="sp-header-field">
-      <label>Owner</label>
-      <span class="sp-field-value">{{ projectHeader.owner }}</span>
+      <span class="sp-header-label">Owner:</span> <span class="sp-header-value">{{ projectHeader.owner }}</span>
     </div>
     <div class="sp-header-field">
-      <label>Emp ID</label>
-      <span class="sp-field-value">{{ projectHeader.employeeId }}</span>
+      <span class="sp-header-label">Emp ID:</span> <span class="sp-header-value">{{ projectHeader.employeeId }}</span>
     </div>
     <div class="sp-header-field">
-      <label>Project Status</label>
-      <span class="sp-field-value sp-status-badge">{{ projectHeader.projectStatus }}</span>
+      <span class="sp-header-label">Project Status:</span> <span class="pd-status-badge">{{ projectHeader.projectStatus }}</span>
     </div>
   </div>
 
   <!-- Back Navigation -->
+
   <div class="sp-back-navigation">
     <a routerLink="/main-layout/project-details-dashboard"><button  class="sp-back-button">
       <i class="pi pi-chevron-left"></i> Back
@@ -45,8 +35,8 @@
     
     <!-- HEADER + SEARCH -->
     <div class="sp-header-row">
-      <div class="um-section-header">
-        <div class="um-section-title">
+      <div class="sp-section-header">
+        <div class="sp-section-title">
           IN PROCESS PARTS STATUS
         </div>
       </div>

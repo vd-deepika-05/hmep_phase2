@@ -6,45 +6,32 @@
   </div>
 
   <!-- Header Section -->
-  <div class="pd-header-section">
-    <div class="pd-header-title">
-      <h1>Release 2 Demo Platform</h1>
-      <p>User-friendly project-wise application aligned to Release 1 style and Release 2 PPT flow.</p>
-    </div>
-
+  <!-- <div class="pd-header-section">
     <div class="pd-search-box">
       <i class="pi pi-search"></i>
       <input type="text" placeholder="Search part / code / stage">
     </div>
-  </div>
+  </div> -->
 
   <!-- Project Header Card -->
   <div class="pd-project-header-card">
-    <div class="pd-header-field">
-      <label>Project Code</label>
-      <span class="pd-field-value">{{ projectDetails.projectCode }}</span>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Project Code:</span> <span class="pd-ph-value">{{ projectDetails.projectCode }}</span>
     </div>
-    <div class="pd-header-field">
-      <label>Project Name</label>
-      <span class="pd-field-value">{{ projectDetails.projectName }}</span>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Project Name:</span> <span class="pd-ph-value">{{ projectDetails.projectName }}</span>
     </div>
-    <div class="pd-header-field">
-      <label>Work Order</label>
-      <span class="pd-field-value">{{ projectDetails.workOrder }}</span>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Work Order:</span> <span class="pd-ph-value">{{ projectDetails.workOrder }}</span>
     </div>
-    <div class="pd-header-field">
-      <label>Owner</label>
-      <span class="pd-field-value">{{ projectDetails.projectOwner }}</span>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Owner:</span> <span class="pd-ph-value">{{ projectDetails.projectOwner }}</span>
     </div>
-    <div class="pd-header-field">
-      <label>EMP ID</label>
-      <span class="pd-field-value">{{ projectDetails.empId }}</span>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Emp ID:</span> <span class="pd-ph-value">{{ projectDetails.empId }}</span>
     </div>
-    <div class="pd-header-field">
-      <label>Project Status</label>
-      <span class="pd-field-value pd-status" [ngClass]="'pd-status-' + projectDetails.projectStatus.toLowerCase().replace(' ', '-')">
-        {{ projectDetails.projectStatus }}
-      </span>
+    <div class="pd-ph-item">
+      <span class="pd-ph-label">Project Status:</span> <span class="pd-status-badge">{{ projectDetails.projectStatus }}</span>
     </div>
   </div>
 
@@ -73,7 +60,7 @@
 
   <!-- Part Category Summary Blocks -->
   <div class="pd-parts-summary-section">
-    <h2>Part Category Summary</h2>
+    <!-- <h2>Part Category Summary</h2> -->
     <div class="pd-parts-grid">
       <!-- Machining Parts -->
       <div class="pd-part-category-card">

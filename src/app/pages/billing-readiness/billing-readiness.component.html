@@ -1,1 +1,91 @@
-<p>billing-readiness works!</p>
+<div class="br-root">
+  <!-- Project Header Card -->
+  <div class="br-project-header-card">
+    <div class="br-ph-item">
+      <span class="br-ph-label">Project Code:</span> <span class="br-ph-value">{{ projectInfo.projectCode }}</span>
+    </div>
+    <div class="br-ph-item">
+      <span class="br-ph-label">Project Name:</span> <span class="br-ph-value">{{ projectInfo.projectName }}</span>
+    </div>
+    <div class="br-ph-item">
+      <span class="br-ph-label">Work Order:</span> <span class="br-ph-value">{{ projectInfo.workOrder }}</span>
+    </div>
+    <div class="br-ph-item">
+      <span class="br-ph-label">Owner:</span> <span class="br-ph-value">{{ projectInfo.projectOwner }}</span>
+    </div>
+    <div class="br-ph-item">
+      <span class="br-ph-label">Emp ID:</span> <span class="br-ph-value">{{ projectInfo.empId }}</span>
+    </div>
+    <div class="br-ph-item">
+      <span class="br-ph-label">Project Status:</span> <span class="pd-status-badge">{{ projectInfo.projectStatus }}</span>
+
+    </div>
+  </div>
+
+  <!-- Back Navigation -->
+  <div class="br-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard">
+      <button class="br-back-button">
+        <i class="pi pi-chevron-left"></i> Back
+      </button>
+    </a>
+  </div>
+
+  <!-- Cleared for Billing Section -->
+  <div class="br-section">
+    <div class="br-section-heading">
+      <div>
+        <h2 class="br-section-heading-title">CLEARED FOR BILLING</h2>
+      </div>
+    </div>
+    
+    <!-- Status Cards Grid -->
+    <div class="br-status-grid">
+      <!-- Execution Status Card -->
+      <div class="br-status-card">
+        <span class="br-status-label">Execution</span>
+        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.executionStatus)">
+          {{ billingReadinessData.executionStatus }}
+        </div>
+        <p class="br-status-desc">All operations completed</p>
+      </div>
+
+      <!-- QC Status Card -->
+      <div class="br-status-card">
+        <span class="br-status-label">QC</span>
+        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.qcStatus)">
+          {{ billingReadinessData.qcStatus }}
+        </div>
+        <p class="br-status-desc">Quality gate passed</p>
+      </div>
+
+      <!-- NCR Status Card -->
+      <div class="br-status-card">
+        <span class="br-status-label">NCR</span>
+        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.ncrStatus)">
+          {{ billingReadinessData.ncrStatus }}
+        </div>
+        <p class="br-status-desc">No open NCR pending</p>
+      </div>
+
+      <!-- Final Check Status Card -->
+      <div class="br-status-card">
+        <span class="br-status-label">Final Checks</span>
+        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.finalCheckStatus)">
+          {{ billingReadinessData.finalCheckStatus }}
+        </div>
+        <p class="br-status-desc">Assembly / paint validated</p>
+      </div>
+    </div>
+
+    <!-- Validation Alert -->
+    <div class="br-validation-alert" [ngClass]="isReadyForBilling ? 'br-alert-success' : 'br-alert-warning'">
+      <i class="pi" [ngClass]="isReadyForBilling ? 'pi-check-circle' : 'pi-exclamation-circle'"></i>
+      <div class="br-alert-content">
+        <p class="br-alert-title" *ngIf="isReadyForBilling">Project is ready for billing handoff.</p>
+        <p class="br-alert-title" *ngIf="!isReadyForBilling">Project is NOT ready for billing.</p>
+        <p class="br-alert-desc" *ngIf="isReadyForBilling">All project-wise Release 2 execution, inspection, QC and final checks are completed.</p>
+        <p class="br-alert-desc" *ngIf="!isReadyForBilling">Please ensure all validations are complete before proceeding.</p>
+      </div>
+    </div>
+  </div>

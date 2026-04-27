@@ -29,7 +29,7 @@
       <span class="um-ph-label">Emp ID:</span> {{ projectDetails.empId }}
     </div>
     <div class="um-ph-item">
-      <span class="um-ph-label">Project Status:</span> {{ projectDetails.status }}
+      <span class="um-ph-label">Project Status:</span><span class="pd-status-badge"> {{ projectDetails.status }}</span>
     </div>
   </div>
 
@@ -42,7 +42,7 @@
   <div class="um-table-section">
     <div class="ru-section-header" >
       <div class="um-section-title">Reports</div>
-     <div class="pd-search-box">
+     <div class="wb-table-search inpu">
       <i class="pi pi-search"></i>
       <input type="text" placeholder="Search part / code / stage">
     </div>
