@@ -1,1 +1,425 @@
-<p>inspection-report works!</p>
+<div class="in-wrapper">
+
+  <!-- Main Content -->
+  <main class="in-main">
+    <!-- Page Header -->
+      <!-- <div class="in-search-box">
+        <span class="in-search-icon">&#128269;</span>
+        <input type="text" class="in-search-input" placeholder="Search part / code / stage" />
+      </div> -->
+    
+
+    <!-- Project Meta Info -->
+    <div class="pd-project-header-card">
+      <div class="pd-ph-item">
+        <div class="pd-ph-item"><span class="pd-ph-label">Project Code:</span> <span class="pd-ph-value">PU-25341</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Project Name:</span> <span class="pd-ph-value">Cable Bracket Assembly</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Work Order:</span> <span class="pd-ph-value">41</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Owner:</span> <span class="pd-ph-value">Suman Reddy</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Emp ID:</span> <span class="pd-ph-value">EMP104</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Project Status:</span> <span class="pd-ph-value in-status-badge">In Process</span></div>
+      </div>
+      <div class="in-meta-row">
+        <div class="pd-ph-item"><span class="pd-ph-label">Part No:</span> <span class="pd-ph-value">K6064738</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Part Name:</span> <span class="pd-ph-value">CABLE BRACKET TU/2</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Material:</span> <span class="pd-ph-value">Stainless Steel 304</span></div>
+        <div class="pd-ph-item"><span class="pd-ph-label">Required Finish:</span> <span class="pd-ph-value">Passivation</span></div>
+      </div>
+    </div>
+
+<div class="sp-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard"><button  class="sp-back-button">
+      <i class="pi pi-chevron-left"></i> Back
+    </button></a>
+  </div>
+    <!-- Content Grid -->
+    <div class="in-content-grid">
+
+      <!-- Stage Navigation -->
+      <div class="in-stage-nav-panel">
+        <div class="in-panel-title">Stage Navigation</div>
+        <div class="in-stage-list">
+          <div
+            *ngFor="let stage of stages; let i = index"
+            class="in-stage-item"
+            [class.in-stage-active]="activeStageIndex === i"
+            [class.in-stage-completed]="stage.completed"
+            (click)="navigateToStage(i)"
+          >
+            <div class="in-stage-name">{{ stage.name }}</div>
+            <div class="in-stage-sub">STAGE - {{ stage.stageNum }}</div>
+            <span *ngIf="stage.completed" class="in-stage-check">&#10003;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inspection Form Panel -->
+      <div class="in-form-panel">
+        <div class="in-panel-title">{{ currentStage.name }}</div>
+
+        <!-- Header Fields (read-only) -->
+        <div class="in-header-fields">
+          <div class="in-field-row">
+            <div class="in-field-group">
+              <label class="in-field-label">Date</label>
+              <input class="in-field-input in-field-readonly" type="text" [value]="today" readonly />
+            </div>
+            <div class="in-field-group">
+              <label class="in-field-label">Time</label>
+              <input class="in-field-input in-field-readonly" type="text" [value]="currentTime" readonly />
+            </div>
+          </div>
+          <div class="in-field-row">
+            <div class="in-field-group">
+              <label class="in-field-label">Inspection Report No</label>
+              <input class="in-field-input in-field-readonly" type="text" [value]="inspectionReportNo" readonly placeholder="Auto-fill in sequence" />
+            </div>
+            <div class="in-field-group">
+              <label class="in-field-label">Material</label>
+              <input class="in-field-input in-field-readonly" type="text" value="Stainless Steel 304" readonly />
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Stage Form -->
+        <form [formGroup]="stageForm" (ngSubmit)="onSubmit()" novalidate>
+
+          <!-- Laser Cutting (Stage 1) -->
+          <ng-container *ngIf="activeStageIndex === 0">
+            <div class="in-section-title">Dimension Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"> </span>
+                <span class="in-col-label">L (mm)</span>
+                <span class="in-col-label">W (mm)</span>
+                <span class="in-col-label">T (mm)</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div
+                formArrayName="rows"
+                *ngFor="let row of rowsArray.controls; let ri = index"
+              >
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <input formControlName="length" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'length')" type="number" placeholder="L mm" />
+                  <input formControlName="width" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'width')" type="number" placeholder="W mm" />
+                  <input formControlName="thickness" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'thickness')" type="number" placeholder="T mm" />
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- CSK Drilling (Stage 2) -->
+          <ng-container *ngIf="activeStageIndex === 1">
+            <div class="in-section-title">CSK Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"></span>
+                <span class="in-col-label">Hole Dia (mm)</span>
+                <span class="in-col-label">CSK Angle (°)</span>
+                <span class="in-col-label">Depth (mm)</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <input formControlName="holeDia" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'holeDia')" type="number" placeholder="Dia mm" />
+                  <input formControlName="cskAngle" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'cskAngle')" type="number" placeholder="Angle °" />
+                  <input formControlName="depth" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'depth')" type="number" placeholder="Depth mm" />
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- Deburring / Buffing (Stage 3) -->
+          <ng-container *ngIf="activeStageIndex === 2">
+            <div class="in-section-title">Surface Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"></span>
+                <span class="in-col-label">Surface Area</span>
+                <span class="in-col-label">Burr Present</span>
+                <span class="in-col-label">Finish Quality</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <input formControlName="surfaceArea" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'surfaceArea')" type="text" placeholder="e.g. Top face" />
+                  <select formControlName="burrPresent" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                  <select formControlName="finishQuality" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="Good">Good</option>
+                    <option value="Acceptable">Acceptable</option>
+                    <option value="Poor">Poor</option>
+                  </select>
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- Pre Bending Fastener Insertion (Stage 4) -->
+          <ng-container *ngIf="activeStageIndex === 3">
+            <div class="in-section-title">Spacer / Stud Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"></span>
+                <span class="in-col-label">Fastener Type</span>
+                <span class="in-col-label">Position</span>
+                <span class="in-col-label">Torque (Nm)</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <select formControlName="fastenerType" class="in-field-input in-row-input in-select" [class.in-input-error]="isRowFieldInvalid(ri,'fastenerType')">
+                    <option value="">--</option>
+                    <option value="Spacer">Spacer</option>
+                    <option value="Stud">Stud</option>
+                    <option value="Bolt">Bolt</option>
+                  </select>
+                  <input formControlName="position" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'position')" type="text" placeholder="Position" />
+                  <input formControlName="torque" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'torque')" type="number" placeholder="Nm" />
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- Bending Flange Dimensions (Stage 5) -->
+          <ng-container *ngIf="activeStageIndex === 4">
+            <div class="in-section-title">Flange Dimension Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"></span>
+                <span class="in-col-label">Flange No</span>
+                <span class="in-col-label">Angle (°)</span>
+                <span class="in-col-label">Height (mm)</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <input formControlName="flangeNo" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'flangeNo')" type="text" placeholder="Flange #" />
+                  <input formControlName="angle" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'angle')" type="number" placeholder="Angle °" />
+                  <input formControlName="height" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'height')" type="number" placeholder="Height mm" />
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- Part Dimensions (Stage 6) -->
+          <ng-container *ngIf="activeStageIndex === 5">
+            <div class="in-section-title">Part Dimension Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"></span>
+                <span class="in-col-label">Dimension Name</span>
+                <span class="in-col-label">Nominal (mm)</span>
+                <span class="in-col-label">Actual (mm)</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <input formControlName="dimensionName" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'dimensionName')" type="text" placeholder="e.g. Overall L" />
+                  <input formControlName="nominal" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'nominal')" type="number" placeholder="Nominal" />
+                  <input formControlName="actual" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'actual')" type="number" placeholder="Actual" />
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- Fastener Insertion (Stage 7) -->
+          <ng-container *ngIf="activeStageIndex === 6">
+            <div class="in-section-title">Fastener Insertion Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"></span>
+                <span class="in-col-label">Fastener ID</span>
+                <span class="in-col-label">Type</span>
+                <span class="in-col-label">Torque (Nm)</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <input formControlName="fastenerId" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'fastenerId')" type="text" placeholder="ID" />
+                  <select formControlName="type" class="in-field-input in-row-input in-select" [class.in-input-error]="isRowFieldInvalid(ri,'type')">
+                    <option value="">--</option>
+                    <option value="Bolt">Bolt</option>
+                    <option value="Nut">Nut</option>
+                    <option value="Rivet">Rivet</option>
+                    <option value="Screw">Screw</option>
+                  </select>
+                  <input formControlName="torque" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'torque')" type="number" placeholder="Nm" />
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- Fastener Position (Stage 8) -->
+          <ng-container *ngIf="activeStageIndex === 7">
+            <div class="in-section-title">Fastener Position Checks</div>
+            <div class="in-rows-container">
+              <div class="in-rows-header">
+                <span class="in-col-label"></span>
+                <span class="in-col-label">Fastener ID</span>
+                <span class="in-col-label">X Pos (mm)</span>
+                <span class="in-col-label">Y Pos (mm)</span>
+                <span class="in-col-label">Result</span>
+              </div>
+              <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
+                <div [formGroupName]="ri" class="in-row-entry">
+                  <span class="in-row-num">{{ ri + 1 }}</span>
+                  <input formControlName="fastenerId" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'fastenerId')" type="text" placeholder="ID" />
+                  <input formControlName="xPos" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'xPos')" type="number" placeholder="X mm" />
+                  <input formControlName="yPos" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'yPos')" type="number" placeholder="Y mm" />
+                  <select formControlName="result" class="in-field-input in-row-input in-select">
+                    <option value="">--</option>
+                    <option value="OK">OK</option>
+                    <option value="NG">NG</option>
+                  </select>
+                  <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
+                </div>
+              </div>
+            </div>
+            <button type="button" class="in-add-row-btn" (click)="addRow()">+ Add Row</button>
+          </ng-container>
+
+          <!-- Lot size input (global for all stages) -->
+          <div class="in-lot-section">
+            <div class="in-field-group in-lot-field">
+              <label class="in-field-label">
+                Total Lot Size
+                <span class="in-tooltip" title="Enter total number of parts in the lot">&#9432;</span>
+              </label>
+              <input
+                formControlName="lotSize"
+                class="in-field-input"
+                [class.in-input-error]="isFieldInvalid('lotSize')"
+                type="number"
+                placeholder="Enter lot size"
+                min="1"
+              />
+              <div *ngIf="isFieldInvalid('lotSize')" class="in-error-msg">Lot size is required (min 1)</div>
+            </div>
+            <div class="in-lot-info" *ngIf="stageForm.get('lotSize')?.value">
+              <span class="in-lot-calc">
+                Minimum checked: <strong>{{ minChecked }}</strong> of
+                <strong>{{ stageForm.get('lotSize')?.value }}</strong>
+                &nbsp;|&nbsp; Currently entered: <strong>{{ rowsArray.length }}</strong>
+              </span>
+              <span class="in-lot-status" [class.in-lot-ok]="isLotValid" [class.in-lot-fail]="!isLotValid">
+                {{ isLotValid ? '&#10003; 10% threshold met' : '&#9888; Below 10% threshold' }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Validation note -->
+          <div class="in-info-note">
+            <span class="in-info-icon">&#9432;</span>
+            Min 10% of lot to be checked to enable submit. In case of machined part, menu related to machined part shall open.
+          </div>
+
+          <!-- Validation summary errors -->
+          <div class="in-validation-summary" *ngIf="submitted && !stageForm.valid">
+            <strong>Please fix the following errors before submitting:</strong>
+            <ul>
+              <li *ngIf="isFieldInvalid('lotSize')">Lot size is required.</li>
+              <li *ngIf="!isLotValid && stageForm.get('lotSize')?.value">Minimum 10% of lot ({{ minChecked }} parts) must be checked.</li>
+              <li *ngIf="hasIncompleteRows()">All check rows must have complete entries.</li>
+            </ul>
+          </div>
+
+          <!-- Actions -->
+          <div class="in-actions-bar">
+            <button
+              type="submit"
+              class="in-btn in-btn-primary"
+              [disabled]="submitting"
+            >
+              <span *ngIf="!submitting">SUBMIT</span>
+              <span *ngIf="submitting">Submitting...</span>
+            </button>
+            <button
+              type="button"
+              class="in-btn in-btn-secondary"
+              (click)="nextStep()"
+              [disabled]="activeStageIndex === stages.length - 1"
+            >
+              Next Step
+            </button>
+            <a routerLink="/main-layout/qc-decision"></a><button
+              type="button"
+              class="in-btn in-btn-outline"
+              (click)="goToQCDecision()"
+            >
+              Go to QC Decision
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div><!-- /in-content-grid -->
+
+    <!-- Toast notification -->
+    <div class="in-toast" [class.in-toast-show]="toastVisible" [class.in-toast-success]="toastType === 'success'" [class.in-toast-error]="toastType === 'error'">
+      <span class="in-toast-icon">{{ toastType === 'success' ? '&#10003;' : '&#9888;' }}</span>
+      <span class="in-toast-msg">{{ toastMessage }}</span>
+    </div>
+
+  </main>
+</div>

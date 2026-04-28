@@ -30,7 +30,7 @@
 
   <div class="um-table-section">
     <div class="ru-section-header" >
-      <div class="um-section-title">Reports</div>
+      <div class="ru-section-title">Reports</div>
      <div class="wb-table-search inpu">
       <i class="pi pi-search"></i>
       <input type="text" placeholder="Search part / code / stage">
@@ -41,7 +41,7 @@
       <p-table
         #dt
         [value]="reports"
-        class="um-custom-table"
+        class="ru-custom-table"
         responsiveLayout="scroll"
         [globalFilterFields]="['material', 'reportName']"
         [paginator]="reports.length > 5" 
@@ -64,7 +64,7 @@
 
         <ng-template pTemplate="body" let-report>
           <tr class="um-table-row">
-            <td [ngClass]="{'um-text-bold': !report.isEditing}">
+            <td [ngClass]="{'ru-text-bold': !report.isEditing}">
               <ng-container *ngIf="!report.isEditing; else editMaterial">
                 {{ report.material }}
               </ng-container>
