@@ -3,36 +3,34 @@
 <!-- Project Header -->
 <div class="pd-project-header-card">
 
-<div class="pd-header-field">
-<label>Project Code</label>
-<span class="pd-field-value">{{projectDetails.projectCode}}</span>
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Code:</span>
+<span class="pd-ph-value">{{projectDetails.projectCode}}</span>
 </div>
 
-<div class="pd-header-field">
-<label>Project Name</label>
-<span class="pd-field-value">{{projectDetails.projectName}}</span>
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Name:</span>
+<span class="pd-ph-value">{{projectDetails.projectName}}</span>
 </div>
 
-<div class="pd-header-field">
-<label>Work Order</label>
-<span class="pd-field-value">{{projectDetails.workOrder}}</span>
+<div class="pd-ph-item">
+<span class="pd-ph-label">Work Order:</span>
+<span class="pd-ph-value">{{projectDetails.workOrder}}</span>
 </div>
 
-<div class="pd-header-field">
-<label>Owner</label>
-<span class="pd-field-value">{{projectDetails.projectOwner}}</span>
+<div class="pd-ph-item">
+<span class="pd-ph-label">Owner:</span>
+<span class="pd-ph-value">{{projectDetails.projectOwner}}</span>
 </div>
 
-<div class="pd-header-field">
-<label>EMP ID</label>
-<span class="pd-field-value">{{projectDetails.empId}}</span>
+<div class="pd-ph-item">
+<span class="pd-ph-label">EMP ID:</span>
+<span class="pd-ph-value">{{projectDetails.empId}}</span>
 </div>
 
-<div class="pd-header-field">
-<label>Project Status</label>
-<span
-class="pd-field-value pd-status"
-[ngClass]="'pd-status-'+projectDetails.projectStatus.toLowerCase().replace(' ','-')">
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Status:</span>
+<span class="pd-status-badge">
 {{projectDetails.projectStatus}}
 </span>
 </div>
@@ -40,31 +38,27 @@ class="pd-field-value pd-status"
 </div>
 
 
-
 <!-- Back -->
-<div class="rac-back-row">
-<button class="rac-back-btn"
-(click)="goBack()">
-<i class="pi pi-arrow-left"></i>
-<span>Back</span>
-</button>
-</div>
+<div class="br-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard">
+      <button class="br-back-button">
+        <i class="pi pi-chevron-left"></i> Back
+      </button>
+    </a>
+  </div>
 
 
 
-<!-- SAME TEMPLATE CARD -->
 <div class="rac-card">
 
 <div class="rac-card-title">
 <h3>PAINT / ENGRAVING CHECK</h3>
 </div>
 
-
 <div class="um-form-section rac-form-shell">
 <div class="um-form-body">
 
-
-<!-- Same progress section just blue -->
+<!-- Progress -->
 <div class="rac-progress-box">
 
 <div class="rac-progress-head">
@@ -87,28 +81,49 @@ Turns blue after work on project flow reaches 95%
 
 
 
-<!-- same dropdown -->
-<div class="um-form-group">
+<!-- NEW PROFESSIONAL CHECK STATUS CARD -->
+<div class="pec-status-card">
 
-<label class="um-label">
-Check Status *
+<div class="pec-inline-row">
+
+<div class="pec-inline-left">
+
+<div class="pec-field-icon">
+<i class="pi pi-check-circle"></i>
+</div>
+
+<div class="pec-inline-text">
+<label class="pec-field-label">
+Check Status
 </label>
 
+<div class="pec-field-sub">
+Update paint stage completion status
+</div>
+</div>
+
+</div>
+
+
+<div class="pec-inline-dropdown">
 <p-dropdown
 [options]="statusOptions"
 [(ngModel)]="checkStatus"
 optionLabel="label"
 optionValue="value"
-placeholder="Select Status"
-class="um-primeng-dd">
+placeholder="Select Paint Status"
+styleClass="pec-status-dropdown">
 </p-dropdown>
+</div>
+
+</div>
 
 </div>
 
 
 
-<!-- only text changed -->
-<div class="um-form-group">
+<!-- Remarks -->
+<div class="um-form-group pec-remarks-block">
 
 <label class="um-label">
 Paint / Engraving Remarks
@@ -118,7 +133,7 @@ Paint / Engraving Remarks
 rows="5"
 class="um-input rac-textarea"
 [(ngModel)]="remarks"
-placeholder="Paint / engraving remarks">
+placeholder="Enter paint / engraving remarks">
 </textarea>
 
 </div>

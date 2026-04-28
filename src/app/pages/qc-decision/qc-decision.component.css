@@ -1,0 +1,381 @@
+/* Page */
+.rac-page{
+padding:24px;
+background:#f8fafc;
+min-height:100vh;
+}
+
+
+/* Back */
+.rac-back-row{
+margin:14px 0;
+}
+
+.rac-back-btn{
+display:inline-flex;
+align-items:center;
+gap:8px;
+border:none;
+background:none;
+padding:0;
+font-size:14px;
+font-weight:600;
+color:#64748b;
+cursor:pointer;
+transition:.2s;
+}
+
+.rac-back-btn:hover{
+color:#334155;
+transform:translateX(-2px);
+}
+
+.rac-back-btn i{
+font-size:13px;
+}
+
+
+
+/* Main Card */
+.rac-card{
+margin-top:22px;
+background:#fff;
+border:1px solid #e2e8f0;
+border-radius:20px;
+box-shadow:0 6px 24px rgba(0,0,0,.06);
+overflow:hidden;
+}
+
+.rac-card-title{
+padding:22px 28px;
+border-bottom:1px solid #eef2f7;
+}
+
+.rac-card-title h3{
+margin:0;
+font-size:22px;
+font-weight:700;
+color:#1e293b;
+}
+
+
+/* Form wrapper */
+.rac-form-shell{
+width:100%;
+max-width:none;
+border:none;
+box-shadow:none;
+position:static;
+}
+
+
+/* Progress */
+.rac-progress-box{
+margin-bottom:22px;
+padding:18px;
+background:#f8fbff;
+border:1px solid #dbeafe;
+border-radius:14px;
+}
+
+.rac-progress-head{
+display:flex;
+justify-content:space-between;
+font-weight:600;
+margin-bottom:10px;
+color:#334155;
+}
+
+.rac-progress-bar{
+height:5px;
+background:#dbeafe;
+border-radius:30px;
+overflow:hidden;
+margin-bottom:10px;
+}
+
+.rac-progress-fill{
+height:100%;
+width:0;
+transition:.4s;
+}
+
+/* BLUE for paint check */
+.pec-blue-fill{
+background:#618dee;
+}
+
+.pec-blue-text{
+font-size:12px;
+color:#618dee;
+font-weight:400;
+}
+
+
+
+/* Remarks */
+.rac-textarea{
+height:110px !important;
+padding-top:14px;
+resize:vertical;
+}
+
+
+/* Actions */
+.rac-action-wrap{
+padding-top:20px;
+border-top:none;
+}
+
+/* Changed from GREEN to BLUE */
+.rac-billing-btn{
+max-width:260px !important;
+width:260px;
+
+background:#346ce3 !important;
+background-image:none !important;
+
+border:none !important;
+color:#fff !important;
+
+box-shadow:0 4px 12px rgba(37,99,235,.28) !important;
+}
+
+.rac-billing-btn:hover{
+background:#1d4ed8 !important;
+transform:translateY(-1px);
+}
+
+
+/* Mobile */
+@media(max-width:768px){
+
+.rac-page{
+padding:14px;
+}
+
+.rac-card-title{
+padding:18px;
+}
+
+.rac-billing-btn{
+width:100%;
+max-width:100%;
+}
+
+}
+
+/* QC card */
+/* QC Decision Compact Card */
+.qc-card{
+margin-bottom:24px;
+border-radius:18px;
+overflow:hidden;
+background:#fff;
+border:1px solid #dbe4eb;
+box-shadow:0 4px 14px rgba(0,0,0,.05);
+}
+
+/* title strip */
+.qc-card .rac-card-title{
+padding:16px 24px;
+border-bottom:1px solid #eef2f7;
+background:#ffffff;
+}
+
+.qc-card .rac-card-title h3{
+margin:0;
+font-size:18px;
+font-weight:700;
+color:#334155;
+}
+
+
+/* body */
+.qc-part-box{
+padding:22px 24px 16px;
+background:#fff;
+border:none;
+}
+
+
+/* stacked part details like screenshot */
+.qc-part-grid{
+display:block;
+}
+
+.qc-item{
+margin-bottom:8px;
+line-height:1.4;
+}
+
+.qc-item label{
+display:inline-block;
+min-width:130px;
+font-size:14px;
+font-weight:700;
+color:#475569;
+margin-bottom:0;
+text-transform:none;
+}
+
+.qc-item span{
+font-size:14px;
+font-weight:500;
+color:#334155;
+}
+
+
+
+/* Buttons same row */
+.qc-action-wrap{
+display:flex;
+gap:16px;
+margin-top:18px;
+flex-wrap:wrap;
+}
+
+
+/* GREEN ACCEPT */
+.qc-accept-btn{
+background:#10b981 !important;
+border:none !important;
+color:#fff !important;
+font-weight:700;
+font-size:13px;
+padding:12px 22px;
+border-radius:28px !important;
+box-shadow:0 3px 8px rgba(16,185,129,.28);
+flex:0 0 auto;
+min-width:310px;
+}
+
+.qc-accept-btn:hover{
+background:#059669 !important;
+transform:translateY(-1px);
+}
+
+
+/* RED REJECT */
+.qc-reject-btn{
+background:#ef4444 !important;
+border:none !important;
+color:#fff !important;
+font-weight:700;
+font-size:13px;
+padding:12px 22px;
+border-radius:28px !important;
+box-shadow:0 3px 8px rgba(239,68,68,.28);
+flex:0 0 auto;
+min-width:300px;
+}
+
+.qc-reject-btn:hover{
+background:#dc2626 !important;
+transform:translateY(-1px);
+}
+
+
+.qc-accept-btn i,
+.qc-reject-btn i{
+margin-right:8px;
+font-size:14px;
+}
+
+
+/* Mobile */
+@media(max-width:900px){
+
+.qc-accept-btn,
+.qc-reject-btn{
+width:100%;
+min-width:unset;
+}
+
+.qc-action-wrap{
+flex-direction:column;
+}
+
+}
+.qc-rule-box{
+margin-top:18px;
+padding-top:18px;
+border-top:1px solid #e2e8f0;
+display:flex;
+gap:24px;
+flex-wrap:wrap;
+}
+
+.qc-rule{
+font-size:13px;
+font-weight:600;
+display:flex;
+align-items:center;
+gap:8px;
+}
+
+.qc-rule.success{
+color:#16a34a;
+}
+
+.qc-rule.danger{
+color:#dc2626;
+}
+/* centered details block */
+.qc-part-box{
+padding:26px 24px 18px;
+display:flex;
+justify-content:flex-start;
+}
+
+.qc-part-grid{
+width:900px;          /* increased */
+max-width:100%;
+}
+
+/* label | colon | value */
+.qc-item{
+display:grid;
+grid-template-columns:200px 25px 1fr; /* bigger value area */
+align-items:center;
+padding:10px 0;
+column-gap:18px; 
+}
+
+/* label */
+.qc-item label{
+margin:0;
+font-size:15px;
+font-weight:700;
+color:#475569;
+}
+
+/* aligned colon */
+.qc-item label::after{
+content:":";
+float:right;
+margin-right:6px;
+font-weight:700;
+}
+
+/* values stay single line */
+.qc-item span{
+font-size:15px;
+font-weight:600;
+color:#1e293b;
+white-space:nowrap;   /* single line */
+display:block;
+}
+
+/* mobile */
+@media(max-width:768px){
+
+.qc-item{
+grid-template-columns:140px 18px 1fr;
+}
+
+.qc-item span{
+white-space:normal; /* allow wrap on mobile */
+}
+
+}

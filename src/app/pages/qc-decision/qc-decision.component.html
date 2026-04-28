@@ -1,1 +1,156 @@
-<p>qc-decision works!</p>
+<div class="rac-page">
+
+<!-- Project Header -->
+<div class="pd-project-header-card">
+
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Code:</span>
+<span class="pd-ph-value">
+{{projectDetails.projectCode}}
+</span>
+</div>
+
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Name:</span>
+<span class="pd-ph-value">
+{{projectDetails.projectName}}
+</span>
+</div>
+
+<div class="pd-ph-item">
+<span class="pd-ph-label">Work Order:</span>
+<span class="pd-ph-value">
+{{projectDetails.workOrder}}
+</span>
+</div>
+
+<div class="pd-ph-item">
+<span class="pd-ph-label">Owner:</span>
+<span class="pd-ph-value">
+{{projectDetails.projectOwner}}
+</span>
+</div>
+
+<div class="pd-ph-item">
+<span class="pd-ph-label">EMP ID:</span>
+<span class="pd-ph-value">
+{{projectDetails.empId}}
+</span>
+</div>
+
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Status:</span>
+<span class="pd-status-badge">
+{{projectDetails.projectStatus}}
+</span>
+</div>
+
+</div>
+
+
+
+<!-- Back -->
+<div class="br-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard">
+      <button class="br-back-button">
+        <i class="pi pi-chevron-left"></i> Back
+      </button>
+    </a>
+  </div>
+
+
+
+<!-- QC Decision -->
+<div class="rac-card qc-card">
+
+<div class="rac-card-title">
+<h3>QC Decision</h3>
+</div>
+
+
+<div class="um-form-section rac-form-shell">
+<div class="um-form-body">
+
+
+<div class="qc-part-box">
+
+<div class="qc-part-grid">
+
+<div class="qc-item">
+<label>Part No </label>
+<span>{{partDetails.partNo}}</span>
+</div>
+
+<div class="qc-item">
+<label>Part Name </label>
+<span>{{partDetails.partName}}</span>
+</div>
+
+<div class="qc-item">
+<label>Required Finish </label>
+<span>{{partDetails.requiredFinish}}</span>
+</div>
+
+<div class="qc-item">
+<label>Material </label>
+<span>{{partDetails.material}}</span>
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="qc-action-wrap">
+
+<button
+type="button"
+class="um-btn-save qc-accept-btn"
+(click)="acceptPart()">
+
+<i class="pi pi-check-circle"></i>
+
+PART ACCEPTED AND CLEARED
+FOR NEXT PROCESS
+
+</button>
+
+
+
+<button
+type="button"
+class="um-btn-save qc-reject-btn"
+(click)="rejectPart()">
+
+<i class="pi pi-times-circle"></i>
+
+PART REJECTED / REWORK REQUIRED
+
+</button>
+
+</div>
+
+
+<!-- validation note -->
+<div class="qc-rule-box">
+
+<div class="qc-rule success">
+<i class="pi pi-check"></i>
+Accept updates BOM status green
+</div>
+
+<div class="qc-rule danger">
+<i class="pi pi-exclamation-triangle"></i>
+Reject opens NCR process
+</div>
+
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</div>

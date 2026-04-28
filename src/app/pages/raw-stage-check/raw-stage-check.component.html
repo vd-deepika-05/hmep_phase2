@@ -1,146 +1,162 @@
 <div class="rac-page">
 
-  <!-- Back -->
-  
+<!-- Project Header -->
+<div class="pd-project-header-card">
 
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Code:</span>
+<span class="pd-ph-value">{{projectDetails.projectCode}}</span>
+</div>
 
-  <!-- Project Header -->
-  <div class="pd-project-header-card">
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Name:</span>
+<span class="pd-ph-value">{{projectDetails.projectName}}</span>
+</div>
 
-    <div class="pd-header-field">
-      <label>Project Code</label>
-      <span class="pd-field-value">{{projectDetails.projectCode}}</span>
-    </div>
+<div class="pd-ph-item">
+<span class="pd-ph-label">Work Order:</span>
+<span class="pd-ph-value">{{projectDetails.workOrder}}</span>
+</div>
 
-    <div class="pd-header-field">
-      <label>Project Name</label>
-      <span class="pd-field-value">{{projectDetails.projectName}}</span>
-    </div>
+<div class="pd-ph-item">
+<span class="pd-ph-label">Owner:</span>
+<span class="pd-ph-value">{{projectDetails.projectOwner}}</span>
+</div>
 
-    <div class="pd-header-field">
-      <label>Work Order</label>
-      <span class="pd-field-value">{{projectDetails.workOrder}}</span>
-    </div>
+<div class="pd-ph-item">
+<span class="pd-ph-label">EMP ID:</span>
+<span class="pd-ph-value">{{projectDetails.empId}}</span>
+</div>
 
-    <div class="pd-header-field">
-      <label>Owner</label>
-      <span class="pd-field-value">{{projectDetails.projectOwner}}</span>
-    </div>
-
-    <div class="pd-header-field">
-      <label>EMP ID</label>
-      <span class="pd-field-value">{{projectDetails.empId}}</span>
-    </div>
-
-    <div class="pd-header-field">
-      <label>Project Status</label>
-      <span
-      class="pd-field-value pd-status"
-      [ngClass]="'pd-status-'+projectDetails.projectStatus.toLowerCase().replace(' ','-')">
-      {{projectDetails.projectStatus}}
-      </span>
-    </div>
-
-  </div>
-  <div class="rac-back-row">
-      <button class="rac-back-btn" (click)="goBack()">
-         <i class="pi pi-arrow-left"></i>
-         <span>Back</span>
-      </button>
-  </div>
-
-
-
-  <!-- Raw Stage Card -->
-  <div class="rac-card">
-
-      <div class="rac-card-title">
-          <h3>RAW STAGE ASSEMBLY CHECK</h3>
-      </div>
-
-
-      <div class="um-form-section rac-form-shell">
-      <div class="um-form-body">
-
-
-        <!-- Progress -->
-        <div class="rac-progress-box">
-
-            <div class="rac-progress-head">
-                <span>Parts Completion</span>
-                <span>{{completionPercent}}%</span>
-            </div>
-
-            <div class="rac-progress-bar">
-                <div
-                class="rac-progress-fill"
-                [ngClass]="{'rac-progress-green':completionPercent>=95}"
-                [style.width.%]="completionPercent">
-                </div>
-            </div>
-
-                <small class="pec-green-text">
-                Turns green when 95% of parts are completed
-                </small>
-
-        </div>
-
-
-
-        <!-- Check Status -->
-        <div class="um-form-group">
-
-            <label class="um-label">
-               Check Status *
-            </label>
-
-            <p-dropdown
-            [options]="statusOptions"
-            [(ngModel)]="checkStatus"
-            optionLabel="label"
-            optionValue="value"
-            placeholder="Select Status"
-            class="um-primeng-dd">
-            </p-dropdown>
-
-        </div>
-
-
-        <!-- Remarks -->
-        <div class="um-form-group">
-
-            <label class="um-label">
-              Assembly Observations / Remarks
-            </label>
-
-            <textarea
-            rows="5"
-            class="um-input rac-textarea"
-            [(ngModel)]="remarks"
-            placeholder="Assembly observations / remarks">
-            </textarea>
-
-        </div>
-
-
-
-        <div class="um-form-actions rac-action-wrap">
-
-          <button
-          class="um-btn-save rac-billing-btn"
-          [disabled]="checkStatus!='Completed'"
-          (click)="moveToBilling()">
-
-             Move to Billing Readiness
-
-          </button>
-
-        </div>
-
-      </div>
-      </div>
-
-  </div>
+<div class="pd-ph-item">
+<span class="pd-ph-label">Project Status:</span>
+<span class="pd-status-badge">
+{{projectDetails.projectStatus}}
+</span>
+</div>
 
 </div>
 
+
+<!-- Back -->
+<div class="br-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard">
+      <button class="br-back-button">
+        <i class="pi pi-chevron-left"></i> Back
+      </button>
+    </a>
+  </div>
+
+
+
+<div class="rac-card">
+
+<div class="rac-card-title">
+<h3>RAW STAGE ASSEMBLY CHECK</h3>
+</div>
+
+<div class="um-form-section rac-form-shell">
+<div class="um-form-body">
+
+
+<!-- Progress -->
+<div class="rac-progress-box">
+
+<div class="rac-progress-head">
+<span>Parts Completion</span>
+<span>{{completionPercent}}%</span>
+</div>
+
+<div class="rac-progress-bar">
+<div
+class="rac-progress-fill rsc-green-fill"
+[style.width.%]="completionPercent">
+</div>
+</div>
+
+<small class="rsc-green-text">
+Turns green when 95% of parts are completed
+</small>
+
+</div>
+
+
+
+<!-- STATUS CARD -->
+<div class="rsc-status-card">
+
+<div class="rsc-inline-row">
+
+<div class="rsc-inline-left">
+
+<div class="rsc-field-icon">
+<i class="pi pi-check-circle"></i>
+</div>
+
+<div class="rsc-inline-text">
+<label class="rsc-field-label">
+Check Status
+</label>
+
+<div class="rsc-field-sub">
+Update raw stage completion status
+</div>
+</div>
+
+</div>
+
+
+<div class="rsc-inline-dropdown">
+<p-dropdown
+[options]="statusOptions"
+[(ngModel)]="checkStatus"
+optionLabel="label"
+optionValue="value"
+placeholder="Select Status"
+styleClass="rsc-status-dropdown">
+</p-dropdown>
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- Remarks -->
+<div class="um-form-group rsc-remarks-block">
+
+<label class="um-label">
+Assembly Observations / Remarks
+</label>
+
+<textarea
+rows="5"
+class="um-input rac-textarea"
+[(ngModel)]="remarks"
+placeholder="Enter assembly observations / remarks">
+</textarea>
+
+</div>
+
+
+
+<div class="um-form-actions rac-action-wrap">
+
+<button
+class="um-btn-save rac-billing-btn"
+[disabled]="checkStatus!='Completed'"
+(click)="moveToBilling()">
+
+Move to Billing Readiness
+
+</button>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
