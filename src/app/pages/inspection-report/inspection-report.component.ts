@@ -20,6 +20,8 @@ interface StageConfig {
   templateUrl: './inspection-report.component.html',
   styleUrls: ['./inspection-report.component.css'],
 })
+
+
 export class InspectionReportComponent implements OnInit, OnDestroy {
   // ── Static display data ─────────────────────────────────────────
   today: string = '';
@@ -39,6 +41,21 @@ export class InspectionReportComponent implements OnInit, OnDestroy {
     { name: 'FASTENER INSERTION',        stageNum: 3, completed: false, fields: ['fastenerId', 'type', 'torque', 'result'] },
     { name: 'FASTENER POSITION',         stageNum: 3, completed: false, fields: ['fastenerId', 'xPos', 'yPos', 'result'] },
   ];
+
+  projectHeader = {
+    projectCode: 'PRJ-25041',
+    projectName: 'Cable Bracket Assembly',
+    workOrder: '41',
+    owner: 'Suman Reddy',
+    empId: 'EMP104',
+    projectStatus: 'In Process',
+    partNo: 'CB04718',
+    partName: 'CABLE BRACKET TCU2',
+    material: 'Stainless Steel 304',
+    requiredFinish: 'Passivation'
+  };
+
+  
 
   activeStageIndex = 0;
   get currentStage(): StageConfig { return this.stages[this.activeStageIndex]; }

@@ -10,22 +10,54 @@
     
 
     <!-- Project Meta Info -->
-    <div class="pd-project-header-card">
-      <div class="pd-ph-item">
-        <div class="pd-ph-item"><span class="pd-ph-label">Project Code:</span> <span class="pd-ph-value">PU-25341</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Project Name:</span> <span class="pd-ph-value">Cable Bracket Assembly</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Work Order:</span> <span class="pd-ph-value">41</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Owner:</span> <span class="pd-ph-value">Suman Reddy</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Emp ID:</span> <span class="pd-ph-value">EMP104</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Project Status:</span> <span class="pd-ph-value in-status-badge">In Process</span></div>
-      </div>
-      <div class="in-meta-row">
-        <div class="pd-ph-item"><span class="pd-ph-label">Part No:</span> <span class="pd-ph-value">K6064738</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Part Name:</span> <span class="pd-ph-value">CABLE BRACKET TU/2</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Material:</span> <span class="pd-ph-value">Stainless Steel 304</span></div>
-        <div class="pd-ph-item"><span class="pd-ph-label">Required Finish:</span> <span class="pd-ph-value">Passivation</span></div>
-      </div>
+     <div class="ncr-project-info-bar">
+        <!-- Top Section -->
+        <div class="ncr-info-section">
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Project Code</span>
+                <span class="ncr-info-value">{{ projectHeader.projectCode }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Project Name</span>
+                <span class="ncr-info-value">{{ projectHeader.projectName }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Work Order</span>
+                <span class="ncr-info-value">{{ projectHeader.workOrder }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Owner</span>
+                <span class="ncr-info-value">{{ projectHeader.owner }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Emp ID</span>
+                <span class="ncr-info-value">{{ projectHeader.empId }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Project Status</span>
+                <span class="ncr-info-value ncr-status-badge">{{ projectHeader.projectStatus }}</span>
+            </div>
+        </div>
+        <div class="ncr-info-section2">
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Part No</span>
+                <span class="ncr-info-value">{{ projectHeader.partNo }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Part Name</span>
+                <span class="ncr-info-value">{{ projectHeader.partName }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Material</span>
+                <span class="ncr-info-value">{{ projectHeader.material }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Required Finish</span>
+                <span class="ncr-info-value">{{ projectHeader.requiredFinish }}</span>
+            </div>
+        </div>
     </div>
+
 
 <div class="sp-back-navigation">
     <a routerLink="/main-layout/project-details-dashboard"><button  class="sp-back-button">

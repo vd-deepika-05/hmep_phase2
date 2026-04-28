@@ -1,1 +1,218 @@
-<p>non-conformance-report works!</p>
+<div class="ncr-root">
+    <!-- Project Header Info Card - Single Merged Bar -->
+    <div class="ncr-project-info-bar">
+        <!-- Top Section -->
+        <div class="ncr-info-section">
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Project Code</span>
+                <span class="ncr-info-value">{{ projectHeader.projectCode }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Project Name</span>
+                <span class="ncr-info-value">{{ projectHeader.projectName }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Work Order</span>
+                <span class="ncr-info-value">{{ projectHeader.workOrder }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Owner</span>
+                <span class="ncr-info-value">{{ projectHeader.owner }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Emp ID</span>
+                <span class="ncr-info-value">{{ projectHeader.empId }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Project Status</span>
+                <span class="ncr-info-value ncr-status-badge">{{ projectHeader.projectStatus }}</span>
+            </div>
+        </div>
+        <div class="ncr-info-section2">
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Part No</span>
+                <span class="ncr-info-value">{{ projectHeader.partNo }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Part Name</span>
+                <span class="ncr-info-value">{{ projectHeader.partName }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Material</span>
+                <span class="ncr-info-value">{{ projectHeader.material }}</span>
+            </div>
+            <div class="ncr-info-group">
+                <span class="ncr-info-label">Required Finish</span>
+                <span class="ncr-info-value">{{ projectHeader.requiredFinish }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="sp-back-navigation">
+    <a routerLink="/main-layout/project-details-dashboard"><button  class="sp-back-button">
+      <i class="pi pi-chevron-left"></i> Back
+    </button></a>
+  </div>
+
+    <!-- Main Content Grid -->
+    <div class="ncr-container">
+        <!-- NCR Section (Left) -->
+        <div class="ncr-section">
+            <h2 class="ncr-section-title">NON CONFORMANCE PROCESS</h2>
+
+            <form [formGroup]="ncrForm" class="ncr-form">
+                <!-- Date Row -->
+                <div class="ncr-form-row">
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Date</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="date" placeholder="xx/xx/xxx" readonly />
+                    </div>
+
+                    <!-- Time Column -->
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Time</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="time" placeholder="xx:xx" readonly />
+                    </div>
+                </div>
+
+                <!-- Part No Row -->
+                <div class="ncr-form-row">
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Part No</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="partNo" readonly />
+                    </div>
+
+                    <!-- Inspection Report No -->
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Inspection Report No</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="inspectionReportNo" readonly />
+                    </div>
+                </div>
+
+                <!-- Description of Non-Conformance -->
+                <div class="ncr-form-group ncr-form-group-full">
+                    <label class="ncr-label">Description of Non-Conformance / Problem <span
+                            class="ncr-required">*</span></label>
+                    <textarea 
+                      class="ncr-textarea" 
+                      [ngClass]="{ 'ncr-input-error': hasError(ncrForm, 'problemDescription') && showNcrErrors }"
+                      formControlName="problemDescription"
+                      placeholder="Enter description..." 
+                      rows="4"
+                    ></textarea>
+                    <span *ngIf="hasError(ncrForm, 'problemDescription') && showNcrErrors" class="ncr-error-text">
+                      {{ getErrorMessage(ncrForm, 'problemDescription') }}
+                    </span>
+                </div>
+
+                <!-- Action Button and Label Row -->
+                <div class="ncr-action-row">
+                    <button type="button" class="ncr-btn ncr-btn-secondary" (click)="onCorrectionAction()">
+                        Corrective action / Preventive Action Report
+                    </button>
+                    <button type="button" class="ncr-btn ncr-btn-tertiary" (click)="onNonConformanceReport()">
+                        NON CONFORMANCE REPORT
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- CAPA Section (Right) -->
+        <div class="ncr-section">
+            <h2 class="ncr-section-title">CA / PA GENERATION</h2>
+
+            <form [formGroup]="capaForm" class="ncr-form">
+                <!-- Work Order No and Inspection Report No Row -->
+                <div class="ncr-form-row">
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Work Order No</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="workOrderNo" readonly />
+                    </div>
+
+                    <!-- Inspection Report No -->
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Inspection report No</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="inspectionReportNo" readonly />
+                    </div>
+                </div>
+
+                <!-- Total Qty Produced and Rejected Qty Row -->
+                <div class="ncr-form-row">
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Total Qty Produced</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="totalQtyProduced" readonly />
+                    </div>
+
+                    <!-- Rejected Qty -->
+                    <div class="ncr-form-group">
+                        <label class="ncr-label">Rejected Qty</label>
+                        <input type="text" class="ncr-input ncr-input-display" formControlName="rejectedQty" readonly />
+                    </div>
+                </div>
+
+                <!-- Root Cause Analysis and CA/PA Plan -->
+                <div class="ncr-form-group ncr-form-group-full">
+                    <label class="ncr-label">Root Cause Analysis and CA/PA Plan <span
+                            class="ncr-required">*</span></label>
+                    <textarea 
+                      class="ncr-textarea" 
+                      [ngClass]="{ 'ncr-input-error': hasError(capaForm, 'rootCauseAnalysis') && showCapaErrors }"
+                      formControlName="rootCauseAnalysis"
+                      placeholder="Enter root cause analysis and CA/PA plan..." 
+                      rows="3"
+                    ></textarea>
+                    <span *ngIf="hasError(capaForm, 'rootCauseAnalysis') && showCapaErrors" class="ncr-error-text">
+                      {{ getErrorMessage(capaForm, 'rootCauseAnalysis') }}
+                    </span>
+                </div>
+
+                <!-- Corrective / Preventive Action Taken -->
+                <div class="ncr-form-group ncr-form-group-full">
+                    <label class="ncr-label">Corrective / Preventive Action Taken <span
+                            class="ncr-required">*</span></label>
+                    <textarea 
+                      class="ncr-textarea" 
+                      [ngClass]="{ 'ncr-input-error': hasError(capaForm, 'actionTaken') && showCapaErrors }"
+                      formControlName="actionTaken"
+                      placeholder="Enter corrective/preventive action taken..." 
+                      rows="3"
+                    ></textarea>
+                    <span *ngIf="hasError(capaForm, 'actionTaken') && showCapaErrors" class="ncr-error-text">
+                      {{ getErrorMessage(capaForm, 'actionTaken') }}
+                    </span>
+                </div>
+
+                <!-- Verification Comments -->
+                <div class="ncr-form-group ncr-form-group-full">
+                    <label class="ncr-label">Verification comments</label>
+                    <textarea 
+                      class="ncr-textarea" 
+                      [ngClass]="{ 'ncr-input-error': hasError(capaForm, 'verificationComments') && showCapaErrors }"
+                      formControlName="verificationComments"
+                      placeholder="Enter verification comments..." 
+                      rows="3"
+                    ></textarea>
+                    <span *ngIf="hasError(capaForm, 'verificationComments') && showCapaErrors" class="ncr-error-text">
+                      {{ getErrorMessage(capaForm, 'verificationComments') }}
+                    </span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="ncr-form-actions-capa">
+                    <button type="submit" class="ncr-btn ncr-btn-primary" [disabled]="!capaForm.valid">
+                        <i class="pi pi-check"></i> Submit
+                    </button>
+                    <button type="button" class="ncr-btn ncr-btn-secondary" (click)="onApplyVerification()">
+                        Apply for Verification
+                    </button>
+                    <button type="button" class="ncr-btn ncr-btn-success" (click)="onVerificationApproved()">
+                        Verification Approved
+                    </button>
+                    <button type="button" class="ncr-btn ncr-btn-tertiary" (click)="onReturnToProject()">
+                        Return to Project
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
