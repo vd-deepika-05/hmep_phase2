@@ -29,8 +29,10 @@ Validation
     <div class="um-stat-card">
       <div class="um-stat-info">
         <div class="um-stat-label">Assigned Projects</div>
-        <div class="um-stat-value">{{ stats.assigned }}</div>
-        <div class="um-stat-subtitle">Only projects mapped to logged in owner</div>
+        <div class="wb-text">
+        <div class="um-stat-value">{{ stats.assigned }} </div>
+        <div class="wb-stat-subtitle">Only projects mapped </div>
+        </div>
       </div>
       <div class="um-stat-icon-wrapper blue">
         <i class="pi pi-briefcase"></i>
@@ -41,11 +43,13 @@ Validation
     <div class="um-stat-card">
       <div class="um-stat-info">
         <div class="um-stat-label">Open Execution</div>
+        <div class="wb-text">
         <div class="um-stat-value">{{ stats.open }}</div>
-        <div class="um-stat-subtitle">Projects needing work updates</div>
+        <div class="wb-stat-subtitle">Projects work updates</div>
+        </div>
       </div>
       <div class="um-stat-icon-wrapper purple">
-        <!-- ✅ Better icon -->
+        <!-- Better icon -->
         <i class="pi pi-cog"></i>
       </div>
     </div>
@@ -54,8 +58,10 @@ Validation
     <div class="um-stat-card">
       <div class="um-stat-info">
         <div class="um-stat-label">QC Pending</div>
+        <div class="wb-text">
         <div class="um-stat-value">{{ stats.qcPending }}</div>
-        <div class="um-stat-subtitle">Awaiting approval</div>
+        <div class="wb-stat-subtitle">Awaiting approval</div>
+        </div>
       </div>
       <div class="um-stat-icon-wrapper green">
         <i class="pi pi-clock"></i>
@@ -66,8 +72,10 @@ Validation
     <div class="um-stat-card">
       <div class="um-stat-info">
         <div class="um-stat-label">Billing Ready</div>
-        <div class="um-stat-value">{{ stats.billingReady }}</div>
-        <div class="um-stat-subtitle">Final checks pending</div>
+          <div class="wb-text">
+          <div class="um-stat-value">{{ stats.billingReady }}</div>
+          <div class="wb-stat-subtitle">Final checks pending</div>
+          </div>
       </div>
       <div class="um-stat-icon-wrapper orange">
         <i class="pi pi-check-circle"></i>
@@ -137,7 +145,7 @@ Validation
             <th>Project Name</th>
             <th>Work Order</th>
             <th>Status</th>
-            <th>Action</th>
+            <!-- <th>Action</th> -->
 
           </tr>
         </ng-template>
@@ -148,7 +156,7 @@ Validation
 
             <td>{{ row.projectOwner }}</td>
             <td>{{ row.empId }}</td>
-            <td class="um-text-bold">{{ row.projectCode }}</td>
+            <td>{{ row.projectCode }}</td>
             <td>{{ row.projectName }}</td>
             <td>{{ row.workOrder }}</td>
 
