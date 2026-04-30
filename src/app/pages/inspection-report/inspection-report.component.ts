@@ -55,7 +55,38 @@ export class InspectionReportComponent implements OnInit, OnDestroy {
     requiredFinish: 'Passivation'
   };
 
-  
+  // ── Dropdown Options ────────────────────────────────────────────
+  resultOptions = [
+    { label: 'OK', value: 'OK' },
+    { label: 'NG', value: 'NG' }
+  ];
+
+  burrPresentOptions = [
+    { label: 'Yes', value: 'Yes' },
+    { label: 'No', value: 'No' }
+  ];
+
+  finishQualityOptions = [
+    { label: 'Good', value: 'Good' },
+    { label: 'Acceptable', value: 'Acceptable' },
+    { label: 'Poor', value: 'Poor' }
+  ];
+
+  fastenerTypeOptions = [
+    { label: 'Spacer', value: 'Spacer' },
+    { label: 'Stud', value: 'Stud' },
+    { label: 'Bolt', value: 'Bolt' }
+  ];
+
+  fastenerInsertionTypeOptions = [
+    { label: 'Bolt', value: 'Bolt' },
+    { label: 'Nut', value: 'Nut' },
+    { label: 'Rivet', value: 'Rivet' },
+    { label: 'Screw', value: 'Screw' }
+  ];
+
+  checkStatus = '';
+  remarks = '';
 
   activeStageIndex = 0;
   get currentStage(): StageConfig { return this.stages[this.activeStageIndex]; }

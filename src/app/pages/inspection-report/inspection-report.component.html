@@ -136,11 +136,16 @@
                   <input formControlName="length" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'length')" type="number" placeholder="L mm" />
                   <input formControlName="width" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'width')" type="number" placeholder="W mm" />
                   <input formControlName="thickness" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'thickness')" type="number" placeholder="T mm" />
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+<div class="in-inline-dropdown">
+ <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
+</div>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>
@@ -165,11 +170,14 @@
                   <input formControlName="holeDia" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'holeDia')" type="number" placeholder="Dia mm" />
                   <input formControlName="cskAngle" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'cskAngle')" type="number" placeholder="Angle °" />
                   <input formControlName="depth" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'depth')" type="number" placeholder="Depth mm" />
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>
@@ -192,22 +200,30 @@
                 <div [formGroupName]="ri" class="in-row-entry">
                   <span class="in-row-num">{{ ri + 1 }}</span>
                   <input formControlName="surfaceArea" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'surfaceArea')" type="text" placeholder="e.g. Top face" />
-                  <select formControlName="burrPresent" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
-                  <select formControlName="finishQuality" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="Good">Good</option>
-                    <option value="Acceptable">Acceptable</option>
-                    <option value="Poor">Poor</option>
-                  </select>
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="burrPresent"
+                    [options]="burrPresentOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
+                  <p-dropdown
+                    formControlName="finishQuality"
+                    [options]="finishQualityOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Quality"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
+                  <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>
@@ -229,19 +245,25 @@
               <div formArrayName="rows" *ngFor="let row of rowsArray.controls; let ri = index">
                 <div [formGroupName]="ri" class="in-row-entry">
                   <span class="in-row-num">{{ ri + 1 }}</span>
-                  <select formControlName="fastenerType" class="in-field-input in-row-input in-select" [class.in-input-error]="isRowFieldInvalid(ri,'fastenerType')">
-                    <option value="">--</option>
-                    <option value="Spacer">Spacer</option>
-                    <option value="Stud">Stud</option>
-                    <option value="Bolt">Bolt</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="fastenerType"
+                    [options]="fastenerTypeOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Type"
+                    styleClass="in-inline-dropdown"
+                    [ngClass]="{'in-input-error': isRowFieldInvalid(ri,'fastenerType')}">
+                  </p-dropdown>
                   <input formControlName="position" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'position')" type="text" placeholder="Position" />
                   <input formControlName="torque" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'torque')" type="number" placeholder="Nm" />
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>
@@ -266,11 +288,14 @@
                   <input formControlName="flangeNo" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'flangeNo')" type="text" placeholder="Flange #" />
                   <input formControlName="angle" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'angle')" type="number" placeholder="Angle °" />
                   <input formControlName="height" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'height')" type="number" placeholder="Height mm" />
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>
@@ -295,11 +320,14 @@
                   <input formControlName="dimensionName" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'dimensionName')" type="text" placeholder="e.g. Overall L" />
                   <input formControlName="nominal" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'nominal')" type="number" placeholder="Nominal" />
                   <input formControlName="actual" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'actual')" type="number" placeholder="Actual" />
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>
@@ -322,19 +350,24 @@
                 <div [formGroupName]="ri" class="in-row-entry">
                   <span class="in-row-num">{{ ri + 1 }}</span>
                   <input formControlName="fastenerId" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'fastenerId')" type="text" placeholder="ID" />
-                  <select formControlName="type" class="in-field-input in-row-input in-select" [class.in-input-error]="isRowFieldInvalid(ri,'type')">
-                    <option value="">--</option>
-                    <option value="Bolt">Bolt</option>
-                    <option value="Nut">Nut</option>
-                    <option value="Rivet">Rivet</option>
-                    <option value="Screw">Screw</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="type"
+                    [options]="fastenerInsertionTypeOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Type"
+                    styleClass="in-inline-dropdown"
+                    [ngClass]="{'in-input-error': isRowFieldInvalid(ri,'type')}">
+                  </p-dropdown>
                   <input formControlName="torque" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'torque')" type="number" placeholder="Nm" />
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>
@@ -359,11 +392,14 @@
                   <input formControlName="fastenerId" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'fastenerId')" type="text" placeholder="ID" />
                   <input formControlName="xPos" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'xPos')" type="number" placeholder="X mm" />
                   <input formControlName="yPos" class="in-field-input in-row-input" [class.in-input-error]="isRowFieldInvalid(ri,'yPos')" type="number" placeholder="Y mm" />
-                  <select formControlName="result" class="in-field-input in-row-input in-select">
-                    <option value="">--</option>
-                    <option value="OK">OK</option>
-                    <option value="NG">NG</option>
-                  </select>
+                  <p-dropdown
+                    formControlName="result"
+                    [options]="resultOptions"
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select Result"
+                    styleClass="in-inline-dropdown">
+                  </p-dropdown>
                   <button type="button" class="in-row-remove-btn" (click)="removeRow(ri)" *ngIf="rowsArray.length > 1">&#10005;</button>
                 </div>
               </div>

@@ -97,6 +97,23 @@ export class BillingReadinessComponent implements OnInit {
   }
 
   /**
+   * Get icon class for status based on status text
+   * Returns appropriate PrimeNG icon
+   */
+  getStatusIcon(status: string): string {
+    const statusLower = status.toLowerCase();
+    const iconMap: { [key: string]: string } = {
+      'completed': 'pi-check-circle',
+      'approved': 'pi-check-circle',
+      'resolved': 'pi-check-circle',
+      'done': 'pi-check-circle',
+      'pending': 'pi-exclamation-circle',
+      'failed': 'pi-times-circle'
+    };
+    return iconMap[statusLower] || 'pi-info-circle';
+  }
+
+  /**
    * Navigate back to project details dashboard
    */
   goBack(): void {
@@ -126,4 +143,3 @@ export class BillingReadinessComponent implements OnInit {
     this.validateBillingReadiness();
   }
 }
-

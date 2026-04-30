@@ -43,38 +43,58 @@
     <div class="br-status-grid">
       <!-- Execution Status Card -->
       <div class="br-status-card">
-        <span class="br-status-label">Execution</span>
-        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.executionStatus)">
-          {{ billingReadinessData.executionStatus }}
+        <div class="br-status-content">
+          <span class="br-status-label">Execution</span>
+          <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.executionStatus)">
+            {{ billingReadinessData.executionStatus }}
+          </div>
+          <p class="br-status-desc">All operations completed</p>
         </div>
-        <p class="br-status-desc">All operations completed</p>
+        <div class="br-status-icon">
+          <i class="pi" [ngClass]="getStatusIcon(billingReadinessData.executionStatus)"></i>
+        </div>
       </div>
 
       <!-- QC Status Card -->
       <div class="br-status-card">
-        <span class="br-status-label">QC</span>
-        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.qcStatus)">
-          {{ billingReadinessData.qcStatus }}
+        <div class="br-status-content">
+          <span class="br-status-label">QC</span>
+          <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.qcStatus)">
+            {{ billingReadinessData.qcStatus }}
+          </div>
+          <p class="br-status-desc">Quality gate passed</p>
         </div>
-        <p class="br-status-desc">Quality gate passed</p>
+        <div class="br-status-icon">
+          <i class="pi" [ngClass]="getStatusIcon(billingReadinessData.qcStatus)"></i>
+        </div>
       </div>
 
       <!-- NCR Status Card -->
       <div class="br-status-card">
-        <span class="br-status-label">NCR</span>
-        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.ncrStatus)">
-          {{ billingReadinessData.ncrStatus }}
+        <div class="br-status-content">
+          <span class="br-status-label">NCR</span>
+          <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.ncrStatus)">
+            {{ billingReadinessData.ncrStatus }}
+          </div>
+          <p class="br-status-desc">No open NCR pending</p>
         </div>
-        <p class="br-status-desc">No open NCR pending</p>
+        <div class="br-status-icon">
+          <i class="pi" [ngClass]="getStatusIcon(billingReadinessData.ncrStatus)"></i>
+        </div>
       </div>
 
       <!-- Final Check Status Card -->
       <div class="br-status-card">
-        <span class="br-status-label">Final Checks</span>
-        <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.finalCheckStatus)">
-          {{ billingReadinessData.finalCheckStatus }}
+        <div class="br-status-content">
+          <span class="br-status-label">Final Checks</span>
+          <div class="br-status-value" [ngClass]="'br-status-' + getStatusClass(billingReadinessData.finalCheckStatus)">
+            {{ billingReadinessData.finalCheckStatus }}
+          </div>
+          <p class="br-status-desc">Assembly / paint validated</p>
         </div>
-        <p class="br-status-desc">Assembly / paint validated</p>
+        <div class="br-status-icon">
+          <i class="pi" [ngClass]="getStatusIcon(billingReadinessData.finalCheckStatus)"></i>
+        </div>
       </div>
     </div>
 

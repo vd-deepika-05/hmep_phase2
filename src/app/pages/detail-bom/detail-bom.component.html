@@ -52,100 +52,118 @@
 
     <!-- BOM Table
      FOR DESABLEING THE PAGINATIOR JUST CHNAGE FROM TRUE TO FALSE -->
-    <div class="db-table-wrapper">
-      <p-table
-        #dt
-        [value]="bomLines"
-        class="db-custom-table"
-        responsiveLayout="scroll"
-       [paginator]="false"      
-        [rows]="5"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
-        [rowsPerPageOptions]="[5, 10, 20]"
-        [globalFilterFields]="['partNo','partName','drawingNo','excelFileName','partType']"
-        sortMode="multiple"
-      >
-        <ng-template pTemplate="header">
-          <tr>
-            <th pSortableColumn="partNo">Part No <p-sortIcon field="partNo"></p-sortIcon></th>
-            <th pSortableColumn="partName">Part Name <p-sortIcon field="partName"></p-sortIcon></th>
-            <th pSortableColumn="drawingNo">Drawing No <p-sortIcon field="drawingNo"></p-sortIcon></th>
-            <th pSortableColumn="excelFileName">Excel File <p-sortIcon field="excelFileName"></p-sortIcon></th>
-            <th pSortableColumn="partType">Part Type <p-sortIcon field="partType"></p-sortIcon></th>
-            <th pSortableColumn="qty">Qty <p-sortIcon field="qty"></p-sortIcon></th>
-            <th pSortableColumn="currentStage">Current Stage <p-sortIcon field="currentStage"></p-sortIcon></th>
-            <th>Status</th>
-            <th>Image</th>
-            <th>Action</th>
-          </tr>
-        </ng-template>
+    <div class="um-table-wrapper">
+  <p-table
+    #dt
+    [value]="bomLines"
+    styleClass="p-datatable-sm um-custom-table"
+    responsiveLayout="scroll"
+    [paginator]="false"
+    [rows]="5"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [globalFilterFields]="['partNo','partName','drawingNo','excelFileName','partType']"
+    sortMode="multiple"
+  >
 
-        <ng-template pTemplate="body" let-row>
-          <tr class="db-table-row">
-            <td class="db-text-bold">{{ row.partNo }}</td>
-            <td>{{ row.partName }}</td>
-            <td>{{ row.drawingNo }}</td>
-            <td>
-              <span class="db-file-chip" [class.db-file-chip-empty]="!row.excelFileName">
-                {{ row.excelFileName || '—' }}
-              </span>
-            </td>
-            <td><span class="db-part-type-tag">{{ row.partType }}</span></td>
-            <td class="db-text-bold">{{ row.qty }}</td>
-            <td><span class="db-stage-chip">{{ row.currentStage }}</span></td>
-            <td>
-              <span
-                class="db-badge"
-                [ngClass]="{
-                  'db-badge-active'   : row.status === 'In Process',
-                  'db-badge-hold'     : row.status === 'Pending',
-                  'db-badge-inactive' : row.status === 'Rejected',
-                  'db-badge-completed': row.status === 'Completed'
-                }"
-              >
-                {{ row.status }}
-              </span>
-            </td>
+    <!-- HEADER -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="partNo">Part No <p-sortIcon field="partNo"></p-sortIcon></th>
+        <th pSortableColumn="partName">Part Name <p-sortIcon field="partName"></p-sortIcon></th>
+        <th pSortableColumn="drawingNo">Drawing No <p-sortIcon field="drawingNo"></p-sortIcon></th>
+        <th pSortableColumn="excelFileName">Excel File <p-sortIcon field="excelFileName"></p-sortIcon></th>
+        <th pSortableColumn="partType">Part Type <p-sortIcon field="partType"></p-sortIcon></th>
+        <th pSortableColumn="qty">Qty <p-sortIcon field="qty"></p-sortIcon></th>
+        <th pSortableColumn="currentStage">Current Stage <p-sortIcon field="currentStage"></p-sortIcon></th>
+        <th>Status</th>
+        <th>Image</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
 
-            <td class="db-cell-image">
-              <img
-                *ngIf="row.image; else noImg"
-                [src]="row.image"
-                class="db-img-thumb"
-                (click)="openImagePreview(row.image)"
-                title="Click to preview"
-                alt="Linked image thumbnail"
-              />
-              <ng-template #noImg>
-                <div class="db-img-placeholder" (click)="openLinkImageDialog(row)" title="Link image">
-                  <i class="pi pi-image"></i>
-                </div>
-              </ng-template>
-            </td>
+    <!-- BODY -->
+    <ng-template pTemplate="body" let-row>
+      <tr class="um-table-row">
 
-            <td class="db-cell-actions">
-              <button
-                pButton
-                label="Update Parts"
-                class="db-btn db-primary db-update-btn"
-                (click)="openUpdateDialog(row)">
-              </button>
-            </td>
-          </tr>
-        </ng-template>
+        <td>{{ row.partNo }}</td>
+        <td>{{ row.partName }}</td>
+        <td>{{ row.drawingNo }}</td>
 
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="10" class="db-empty-state">
-              <i class="pi pi-inbox"></i>
-              No line items found. Add one using <strong>ADD NEW LINE ITEM</strong> or upload via Excel.
-            </td>
-          </tr>
-        </ng-template>
+        <td>{{ row.excelFileName || '—' }}</td>
 
-      </p-table>
+        <td>
+          <span class="um-badge um-badge-active">
+            {{ row.partType }}
+          </span>
+        </td>
+
+        <td>{{ row.qty }}</td>
+
+        <td>
+          
+            {{ row.currentStage }}
+         
+        </td>
+
+        <!-- STATUS -->
+        <td>
+          <span
+            class="um-badge"
+            [ngClass]="{
+              'um-badge-active'   : row.status === 'In Process',
+              'um-badge-hold'     : row.status === 'Pending',
+              'um-badge-inactive' : row.status === 'Rejected'
+            }"
+          >
+            {{ row.status }}
+          </span>
+        </td>
+
+        <!-- IMAGE -->
+       <td class="um-cell-image">
+  <img
+    *ngIf="row.image; else noImg"
+    [src]="row.image"
+    style="width:40px;height:40px;border-radius:6px;cursor:pointer;"
+    (click)="openImagePreview(row.image)"
+  />
+  <ng-template #noImg>
+    <div
+      style="width:40px;height:40px;border:1px dashed #cbd5e1;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;"
+      (click)="openLinkImageDialog(row)"
+    >
+      <i class="pi pi-image"></i>
     </div>
+  </ng-template>
+</td>
+
+
+        <!-- ACTION -->
+       <td class="um-cell-actions">
+  <button
+    pButton
+    label="Update Parts"
+    class="btn primary"
+    (click)="openUpdateDialog(row)">
+  </button>
+</td>
+
+      </tr>
+    </ng-template>
+
+    <!-- EMPTY -->
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="10" class="text-center p-4">
+          No line items found.
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+</div>
 
   </div>
 
