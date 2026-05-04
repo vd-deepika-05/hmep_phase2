@@ -409,19 +409,19 @@
 
           <!-- Lot size input (global for all stages) -->
           <div class="in-lot-section">
-            <div class="in-field-group in-lot-field">
-              <label class="in-field-label">
-                Total Lot Size
-                <span class="in-tooltip" title="Enter total number of parts in the lot">&#9432;</span>
-              </label>
-              <input
-                formControlName="lotSize"
-                class="in-field-input"
-                [class.in-input-error]="isFieldInvalid('lotSize')"
-                type="number"
-                placeholder="Enter lot size"
-                min="1"
-              />
+            <div class="in-field-group in-lot-field-inline">
+             <label class="in-field-label">
+    Total Lot Size
+    <span class="in-tooltip" title="Enter total number of parts in the lot">&#9432;</span>
+  </label>
+               <input
+    formControlName="lotSize"
+    class="in-field-input"
+    [class.in-input-error]="isFieldInvalid('lotSize')"
+    type="number"
+    placeholder="Enter lot size"
+    min="1"
+  />
               <div *ngIf="isFieldInvalid('lotSize')" class="in-error-msg">Lot size is required (min 1)</div>
             </div>
             <div class="in-lot-info" *ngIf="stageForm.get('lotSize')?.value">

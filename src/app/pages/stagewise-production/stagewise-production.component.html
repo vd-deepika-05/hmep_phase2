@@ -98,7 +98,7 @@
               <p-sortIcon field="sheetmetalDescription"></p-sortIcon>
             </th>
 
-            <th class="text-center" pSortableColumn="sheetmetalCount">
+            <th pSortableColumn="sheetmetalCount">
               No. of Parts
               <p-sortIcon field="sheetmetalCount"></p-sortIcon>
             </th>
@@ -108,7 +108,7 @@
               <p-sortIcon field="machinedDescription"></p-sortIcon>
             </th>
 
-            <th class="text-center" pSortableColumn="machinedCount">
+            <th pSortableColumn="machinedCount">
               No. of Parts
               <p-sortIcon field="machinedCount"></p-sortIcon>
             </th>
@@ -131,10 +131,8 @@
             </td>
 
             <!-- SHEETMETAL COUNT -->
-            <td class="text-center">
-              <span class="um-badge">
+            <td>
                 {{ row.sheetmetalCount }}
-              </span>
             </td>
 
             <!-- MACHINED -->
@@ -143,10 +141,8 @@
             </td>
 
             <!-- MACHINED COUNT -->
-            <td class="text-center">
-              <span class="um-badge">
+            <td >
                 {{ row.machinedCount }}
-              </span>
             </td>
 
           </tr>

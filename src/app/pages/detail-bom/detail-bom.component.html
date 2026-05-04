@@ -37,6 +37,7 @@
         <div class="db-section-title">Bill of Material</div>
       </div>
       <div class="db-bom-actions">
+        
         <button class="db-btn db-outline-btn" (click)="openAddDialog()">
           <i class="pi pi-plus"></i> ADD NEW LINE ITEM
         </button>
@@ -46,6 +47,7 @@
         <button class="db-btn db-outline-btn" (click)="openLinkImageDialog(null)">
           <i class="pi pi-image"></i> LINK IMAGE
         </button>
+        
       </div>
     </div>
 
@@ -54,18 +56,23 @@
      FOR DESABLEING THE PAGINATIOR JUST CHNAGE FROM TRUE TO FALSE -->
     <div class="um-table-wrapper">
   <p-table
-    #dt
-    [value]="bomLines"
-    styleClass="p-datatable-sm um-custom-table"
-    responsiveLayout="scroll"
-    [paginator]="false"
-    [rows]="5"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} items"
-    [rowsPerPageOptions]="[5, 10, 20]"
-    [globalFilterFields]="['partNo','partName','drawingNo','excelFileName','partType']"
-    sortMode="multiple"
-  >
+  #dt
+  [value]="bomLines"
+  styleClass="p-datatable-sm um-custom-table"
+  responsiveLayout="scroll"
+
+  [paginator]="true"               
+  [rows]="5"
+  [rowsPerPageOptions]="[5,10,20]"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+
+  [scrollable]="true"               
+  scrollHeight="flex"              
+
+  [globalFilterFields]="['partNo','partName','drawingNo','partType']"
+  sortMode="multiple"
+>
 
     <!-- HEADER -->
     <ng-template pTemplate="header">
@@ -212,9 +219,16 @@
         </div>
         <div class="db-form-field">
           <label class="db-form-label">Part Type <span class="db-required">*</span></label>
-          <select class="db-form-select" [(ngModel)]="selectedPart.partType">
-            <option *ngFor="let pt of partTypes" [value]="pt">{{ pt }}</option>
-          </select>
+          <p-dropdown
+  [options]="partType"
+  [(ngModel)]="selectedPart.partType"
+  placeholder="— Select —"
+  class="um-primeng-dd"
+  
+  [filter]="true"
+  [ngClass]="{'db-input-error': addSubmitted && !selectedPart!.partType}"
+>
+</p-dropdown>
         </div>
       </div>
 
@@ -225,9 +239,15 @@
         </div>
         <div class="db-form-field">
           <label class="db-form-label">Current Stage</label>
-          <select class="db-form-select" [(ngModel)]="selectedPart.currentStage">
-            <option *ngFor="let s of stages" [value]="s">{{ s }}</option>
-          </select>
+         <p-dropdown
+  [options]="stages"
+  [(ngModel)]="selectedPart!.currentStage"
+  placeholder="Select Stage"
+  class="um-primeng-dd"
+  optionLabel="label"
+  optionValue="value"
+  appendTo="body"
+></p-dropdown>
         </div>
       </div>
 
@@ -245,12 +265,15 @@
       <div class="db-form-row">
         <div class="db-form-field">
           <label class="db-form-label">Status</label>
-          <select class="db-form-select" [(ngModel)]="selectedPart.status">
-            <option value="In Process">In Process</option>
-            <option value="Pending">Pending</option>
-            <option value="Completed">Completed</option>
-            <option value="Rejected">Rejected</option>
-          </select>
+          <p-dropdown
+  [options]="statusOptions"
+  [(ngModel)]="selectedPart!.status"
+  placeholder="Select Status"
+  class="um-primeng-dd"
+  optionLabel="label"
+  optionValue="value"
+  appendTo="body"
+></p-dropdown>
         </div>
       </div>
 
@@ -324,14 +347,16 @@
         </div>
         <div class="db-form-field">
           <label class="db-form-label">Part Type <span class="db-required">*</span></label>
-          <select
-            class="db-form-select"
-            [(ngModel)]="newLine.partType"
-            [class.db-input-error]="addSubmitted && !newLine.partType"
-          >
-            <option value="">— Select —</option>
-            <option *ngFor="let pt of partTypes" [value]="pt">{{ pt }}</option>
-          </select>
+          <p-dropdown
+  [options]="partType"
+  [(ngModel)]="newLine.partType"
+  placeholder="Select"
+  class="um-primeng-dd"
+  [filter]="true"
+  optionLabel="label"
+  optionValue="value"
+  [ngClass]="{'db-input-error': addSubmitted && !newLine.partType}"
+></p-dropdown>
           <span class="db-error-text" *ngIf="addSubmitted && !newLine.partType">Part Type is required</span>
         </div>
       </div>
@@ -351,9 +376,12 @@
         </div>
         <div class="db-form-field">
           <label class="db-form-label">Current Stage</label>
-          <select class="db-form-select" [(ngModel)]="newLine.currentStage">
-            <option *ngFor="let s of stages" [value]="s">{{ s }}</option>
-          </select>
+          <p-dropdown
+  [options]="stages"
+  [(ngModel)]="newLine.currentStage"
+  placeholder="Select Stage"
+  class="um-primeng-dd"
+></p-dropdown>
         </div>
       </div>
 
@@ -398,7 +426,14 @@
     [resizable]="false"
     (onHide)="resetUpload()"
   >
-    <div
+    <div class="db-upload-header-actions">
+
+  <button class="db-btn db-outline-btn" (click)="downloadExcelTemplate()">
+    <i class="pi pi-download"></i> DOWNLOAD TEMPLATE
+  </button>
+
+</div>
+  <div
       class="db-upload-zone"
       [class.db-upload-zone-active]="isDragOver"
       (click)="excelFileInput.click()"
@@ -462,10 +497,24 @@
 
       <div class="db-form-field db-form-field-spaced" *ngIf="!linkImageTargetRow">
         <label class="db-form-label">Select Part <span class="db-required">*</span></label>
-        <select class="db-form-select" [(ngModel)]="selectedPartForLink">
-          <option [ngValue]="null">— Select a part —</option>
-          <option *ngFor="let row of bomLines" [ngValue]="row">{{ row.partNo }} — {{ row.partName }}</option>
-        </select>
+        <p-dropdown
+  [options]="bomLines"
+  [(ngModel)]="selectedPartForLink"
+  placeholder="— Select a part —"
+  class="um-primeng-dd"
+  [filter]="true"
+  filterBy="partNo,partName"
+  optionLabel="partNo"
+  appendTo="body"
+>
+  <ng-template let-item pTemplate="item">
+    {{ item.partNo }} — {{ item.partName }}
+  </ng-template>
+
+  <ng-template let-item pTemplate="selectedItem">
+    {{ item?.partNo }} — {{ item?.partName }}
+  </ng-template>
+</p-dropdown>
       </div>
 
       <div

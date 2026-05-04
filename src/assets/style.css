@@ -11019,7 +11019,27 @@ font-size: 12px;
   background: #fde8e8;
   color: #c0392b;
 }
+.in-lot-section .in-field-group.in-lot-field-inline {
+  display: flex !important;
+  flex-direction: row !important;   /* 🔥 THIS is what you were missing */
+  align-items: center;
+  gap: 12px;
+}
 
+/* label */
+.in-lot-field-inline .in-field-label {
+  white-space: nowrap;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* input */
+.in-lot-field-inline .in-field-input {
+  width: 240px;
+  height: 38px;
+}
 /* ── INFO NOTE ── */
 .in-info-note {
   margin: 0 20px 10px;
@@ -12906,4 +12926,93 @@ white-space:normal; /* allow wrap on mobile */
   text-align: center;
 }
 
-/* bom table */
+/* bom updated css */
+/* ───────── TABLE ───────── */
+.um-table-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.p-datatable {
+  flex: 1;
+}
+
+.p-datatable-scrollable-body {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* ───────── DROPDOWN (FINAL CLEAN VERSION) ───────── */
+
+.um-primeng-dd {
+  width: 100%;
+}
+
+/* 🔥 main dropdown box */
+.db-form-field .um-primeng-dd .p-dropdown {
+  width: 100%;
+  height: 42px;                 /* ✅ single source of truth */
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  padding: 0 12px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background: #fff;
+}
+
+/* text inside */
+.db-form-field .um-primeng-dd .p-dropdown-label {
+  font-size: 13px;
+  line-height: 42px;
+  padding: 0;
+  color: #1a202c;
+}
+
+/* placeholder */
+.db-form-field .um-primeng-dd .p-dropdown-label.p-placeholder {
+  color: #9ca3af;
+}
+
+/* icon */
+.db-form-field .um-primeng-dd .p-dropdown-trigger {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* ───────── DROPDOWN PANEL ───────── */
+
+.p-dropdown-panel {
+  width: 100% !important;
+  border-radius: 8px;
+  padding: 6px 0;
+}
+
+.p-dropdown-filter-container {
+  padding: 8px;
+}
+
+.p-dropdown-filter {
+  width: 100% !important;
+  height: 34px;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.p-dropdown-items {
+  padding: 4px 0;
+}
+
+.p-dropdown-item {
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+/* ───────── UPLOAD BUTTON ALIGNMENT ───────── */
+
+.db-upload-header-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}

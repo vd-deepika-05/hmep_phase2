@@ -9,7 +9,7 @@ export interface BomLine {
   drawingNo: string;
   partType: string;
   qty: number;
-  currentStage: string;
+  currentStage: string | null;
   status: string;
   remarks: string;
   image: string | null;
@@ -72,8 +72,27 @@ projectDetails: ProjectDetails = {
     'Purchased Parts',
     'Assembly Parts',
   ];
-
-  stages: string[] = ['Stage 0', 'Stage 1', 'Stage 2', 'Stage 3', 'Stage 4', 'Final'];
+partType = [
+  { label: 'Sheetmetal Parts', value: 'Sheetmetal Parts' },
+  { label: 'Machining Parts', value: 'Machining Parts' },
+  { label: 'Fabricated Parts', value: 'Fabricated Parts' },
+  { label: 'Purchased Parts', value: 'Purchased Parts' },
+  { label: 'Assembly Parts', value: 'Assembly Parts' }
+];
+  stages = [
+  { label: 'Stage 0', value: 'Stage 0' },
+  { label: 'Stage 1', value: 'Stage 1' },
+  { label: 'Stage 2', value: 'Stage 2' },
+  { label: 'Stage 3', value: 'Stage 3' },
+  { label: 'Stage 4', value: 'Stage 4' },
+  { label: 'Final', value: 'Final' }
+];
+statusOptions = [
+  { label: 'In Process', value: 'In Process' },
+  { label: 'Pending', value: 'Pending' },
+  { label: 'Completed', value: 'Completed' },
+  { label: 'Rejected', value: 'Rejected' }
+];
 
   /* ─── Global image library (persists across link-image sessions) ─── */
   imageLibrary: ImageLibraryItem[] = [];
@@ -136,7 +155,7 @@ projectDetails: ProjectDetails = {
       drawingNo: '',
       partType: '',
       qty: undefined,
-      currentStage: 'Stage 0',
+      currentStage: null,
       remarks: '',
     };
   }
@@ -411,7 +430,31 @@ projectDetails: ProjectDetails = {
     this.showLinkImageDialog = false;
     this.toast(`Image linked to ${target.partNo} successfully.`);
   }
+  /*download excel*/
+  downloadExcelTemplate(): void {
+  const headers = [
+    'Part No',
+    'Part Name',
+    'Drawing No',
+    'Excel File',
+    'Part Type',
+    'Qty',
+    'Current Stage',
+    'Status'
+  ];
 
+  // Only header row
+  const csvContent = headers.join(',');
+
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute('href', url);
+  link.setAttribute('download', 'bom_template.csv');
+  link.click();
+}
   /* ══════════════════════════════════════════════════════════════════
      IMAGE FULL-SCREEN PREVIEW
   ══════════════════════════════════════════════════════════════════ */
